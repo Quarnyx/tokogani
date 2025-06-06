@@ -1,5 +1,5 @@
 <?php
-include "../../layouts/config.php";
+include "../../partials/config.php";
 $sql = "SELECT * FROM pengguna WHERE id_pengguna = '$_POST[id]'";
 $result = $link->query($sql);
 if ($result->num_rows > 0) {
@@ -13,8 +13,8 @@ if ($result->num_rows > 0) {
             <div class="col-md-4">
                 <div>
                     <label for="nama" class="form-label">Nama</label>
-                    <input type="text" class="form-control " name="nama" id="nama" placeholder="Nama"
-                        value="<?= $row['nama'] ?>">
+                    <input type="text" class="form-control " name="nama_pengguna" id="nama" placeholder="Nama"
+                        value="<?= $row['nama_pengguna'] ?>">
                 </div>
             </div>
             <div class="col-md-4">
@@ -27,10 +27,13 @@ if ($result->num_rows > 0) {
             <div class="col-md-4">
                 <label for="level" class="form-label">Level</label>
                 <select class="form-select" name="level" id="level">
-                    <option value="admin" <?php if ($row['level'] == "admin")
-                        echo "selected"; ?>>Admin</option>
-                    <option value="user" <?php if ($row['level'] == "user")
-                        echo "selected"; ?>>User</option>
+                    <?php
+                    $query = mysqli_query($link, "SHOW COLUMNS FROM pengguna LIKE 'level'");
+                    $enum = explode("','", substr(mysqli_fetch_array($query)['Type'], 6, -2));
+                    foreach ($enum as $key => $value) {
+                        echo "<option value='$value' " . ($row['level'] == $value ? 'selected' : '') . ">$value</option>";
+                    }
+                    ?>
                 </select>
             </div>
         </div>

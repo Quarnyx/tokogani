@@ -2,9 +2,14 @@
     <thead>
         <tr>
             <th>No</th>
-            <th>Nama</th>
-            <th>Username</th>
-            <th>Level</th>
+            <th>Kode Barang</th>
+            <th>Nama Barang</th>
+            <th>Jumlah</th>
+            <th>Satuan</th>
+            <th>Tanggal Masuk</th>
+            <th>Supplier</th>
+            <th>No. Surat Jalan</th>
+            <th>PIC</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -12,33 +17,30 @@
         <?php
         require_once '../../partials/config.php';
         $no = 1;
-        $sql = "SELECT * FROM pengguna";
+        $sql = "SELECT * FROM v_penerimaan_barang";
         $result = $link->query($sql);
         while ($row = $result->fetch_assoc()) {
             ?>
             <tr>
                 <td><?= $no++ ?></td>
-                <td> <?= $row['nama_pengguna'] ?>
-                </td>
-                <td><?= $row['username'] ?></td>
-                <td><?= $row['level'] ?></td>
+                <td><?= $row['kode_produk'] ?></td>
+                <td><?= $row['nama_produk'] ?></td>
+                <td><?= $row['jumlah'] ?></td>
+                <td><?= $row['satuan'] ?></td>
+                <td><?= $row['tanggal'] ?></td>
+                <td><?= $row['nama_supplier'] ?></td>
+                <td><?= $row['no_surat_jalan'] ?></td>
+                <td><?= $row['nama_pengguna'] ?></td>
                 <td>
                     <div class="d-flex flex-wrap align-items-end gap-1">
-                        <button id="edit" data-nama="<?= $row['nama_pengguna'] ?>" data-id="<?= $row['id_pengguna'] ?>"
+                        <button id="edit" data-nama="<?= $row['nama_produk'] ?>" data-id="<?= $row['id_barang_masuk'] ?>"
                             class="btn btn-primary-600 radius-8 px-10 py-10 d-flex align-items-center gap-2 text-sm"><iconify-icon
                                 icon="mingcute:bookmark-edit-line" class="text-xl"></iconify-icon>Edit</button>
 
-                        <button id="delete" data-nama="<?= $row['nama_pengguna'] ?>" data-id="<?= $row['id_pengguna'] ?>"
+                        <button id="delete" data-nama="<?= $row['nama_produk'] ?>" data-id="<?= $row['id_barang_masuk'] ?>"
                             class="btn btn-danger-600 radius-8 px-10 py-10 d-flex align-items-center gap-2 text-sm"><iconify-icon
                                 icon="mingcute:delete-2-line" class="text-xl"></iconify-icon>Hapus</button>
-
-                        <button id="ganti-password" data-nama="<?= $row['nama_pengguna']; ?>"
-                            data-id="<?= $row['id_pengguna'] ?>"
-                            class="btn btn-outline-primary-600 radius-8 px-10 py-10 d-flex align-items-center gap-2 text-sm"><iconify-icon
-                                icon="mingcute:key-1-line" class="text-xl"></iconify-icon>Ganti
-                            Password</button>
                     </div>
-
                 </td>
             </tr>
             <?php
@@ -47,7 +49,6 @@
     </tbody>
 </table>
 <script>
-
     $(document).ready(function () {
         $('#table-data').DataTable();
         $('#table-data').on('click', '#edit', function () {
@@ -55,7 +56,7 @@
             const nama = $(this).data('nama');
             $.ajax({
                 type: 'POST',
-                url: 'pages/pengguna/edit-pengguna.php',
+                url: 'pages/penerimaan-barang/edit-penerimaan-barang.php',
                 data: 'id=' + id + '&nama=' + nama,
                 success: function (data) {
                     $('.modal').modal('show');
@@ -64,48 +65,21 @@
                 }
             })
         });
-        $('#table-data').on('click', '#ganti-password', function () {
-            const id = $(this).data('id');
-            const nama = $(this).data('nama');
-            alertify.prompt('Ganti Password ' + nama, 'Masukkan Password Baru', '', function (evt, value) {
-                $.ajax({
-                    type: 'POST',
-                    url: 'pages/pengguna/proses-pengguna.php?aksi=ganti-password',
-                    data: 'id=' + id + '&nama=' + nama + '&password=' + value,
-                    success: function (data) {
-                        if (data == "ok") {
-                            alertify.success('Ganti Password Berhasil');
-
-                        } else {
-                            alertify.error('Ganti Password Gagal');
-
-                        }
-                    },
-                    error: function (data) {
-                        alertify.error(data);
-                    }
-                })
-            }, function () {
-                alertify.error('Ganti password dibatalkan');
-            })
-        });
         $('#table-data').on('click', '#delete', function () {
             const id = $(this).data('id');
             const nama = $(this).data('nama');
             alertify.confirm('Hapus', 'Apakah anda yakin ingin menghapus data ' + nama + '?', function () {
                 $.ajax({
                     type: 'POST',
-                    url: 'pages/pengguna/proses-pengguna.php?aksi=hapus-pengguna',
+                    url: 'pages/penerimaan-barang/proses-penerimaan-barang.php?aksi=hapus-penerimaan-barang',
                     data: 'id=' + id,
                     success: function (data) {
                         if (data == "ok") {
                             loadTable();
                             $('.modal').modal('hide');
-                            alertify.success('Pengguna Berhasil Dihapus');
-
+                            alertify.success('Barang Berhasil Dihapus');
                         } else {
-                            alertify.error('Pengguna Gagal Dihapus');
-
+                            alertify.error('Barang Gagal Dihapus');
                         }
                     },
                     error: function (data) {

@@ -5,7 +5,7 @@
     <div>
         <a href="index.php" class="sidebar-logo">
             <img src="assets/images/logo.png" alt="site logo" class="light-logo">
-            <img src="assets/images/logo-light.png" alt="site logo" class="dark-logo">
+            <img src="assets/images/logo.png" alt="site logo" class="dark-logo">
             <img src="assets/images/logo-icon.png" alt="site logo" class="logo-icon">
         </a>
     </div>
@@ -25,13 +25,13 @@
                 </a>
             </li>
             <li>
-                <a href="chat-message.php">
+                <a href="?page=produk">
                     <iconify-icon icon="bi:chat-dots" class="menu-icon"></iconify-icon>
-                    <span>Barang</span>
+                    <span>Produk</span>
                 </a>
             </li>
             <li>
-                <a href="calendar-main.php">
+                <a href="?page=supplier">
                     <iconify-icon icon="solar:calendar-outline" class="menu-icon"></iconify-icon>
                     <span>Supplier</span>
                 </a>
@@ -46,7 +46,7 @@
             <li class="sidebar-menu-group-title">Transaksi</li>
 
             <li>
-                <a href="email.php">
+                <a href="?page=penerimaan-barang">
                     <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
                     <span>Penerimaan Barang</span>
                 </a>

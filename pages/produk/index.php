@@ -1,19 +1,19 @@
 <?php
-$title = 'Data Pengguna';
-$subTitle = 'Manajemen Pengguna';
+$title = 'Data Produk';
+$subTitle = 'Produk';
 ?>
 <?php include './partials/breadcrumb.php' ?>
 
+
 <!-- end page title -->
-<button class="btn btn-primary mb-3" id="tambah">Tambah Akun</button>
+<button class="btn btn-primary mb-3" id="tambah">Tambah Produk</button>
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title mb-0">Tabel Pengguna</h4>
+                <h4 class="card-title mb-0">Tabel Produk</h4>
             </div><!-- end card header -->
             <div class="card-body" id="tabel">
-
             </div>
             <!-- end card body -->
         </div>
@@ -23,17 +23,16 @@ $subTitle = 'Manajemen Pengguna';
 </div>
 <!-- end row -->
 
-
 <script>
     function loadTable() {
-        $('#tabel').load('pages/pengguna/tabel-pengguna.php');
+        $('#tabel').load('pages/produk/tabel-produk.php');
     }
     $(document).ready(function () {
         loadTable();
         $('#tambah').click(function () {
             $('.modal').modal('show');
-            $('.modal-title').text('Tambah Akun');
-            $('.modal-body').load('pages/pengguna/tambah-pengguna.php');
+            $('.modal-title').text('Tambah Produk');
+            $('.modal-body').load('pages/produk/tambah-produk.php');
         });
     });
 </script>
