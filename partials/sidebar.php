@@ -52,31 +52,31 @@
                 </a>
             </li>
             <li>
-                <a href="email.php">
+                <a href="?page=pengeluaran-barang">
                     <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
                     <span>Pengeluaran Barang</span>
                 </a>
             </li>
             <li>
-                <a href="email.php">
+                <a href="?page=pengembalian-barang">
                     <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
                     <span>Pengembalian Barang</span>
                 </a>
             </li>
             <li>
-                <a href="email.php">
+                <a href="?page=purchase-order">
                     <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
                     <span>Purchase Order</span>
                 </a>
             </li>
             <li>
-                <a href="email.php">
+                <a href="?page=persediaan-barang">
                     <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
                     <span>Persediaan Barang</span>
                 </a>
             </li>
             <li>
-                <a href="email.php">
+                <a href="?page=stok-minimal">
                     <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
                     <span>Stok Minimal</span>
                 </a>
