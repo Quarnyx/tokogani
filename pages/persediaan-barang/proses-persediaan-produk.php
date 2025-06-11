@@ -34,4 +34,33 @@ switch ($_GET['aksi'] ?? '') {
             http_response_code(400);
         }
         break;
+
+    case 'setuju-persediaan-produk':
+        $id = $_POST['id'];
+        $sql = "UPDATE permintaan_barang SET status = 'Disetujui' WHERE id_permintaan_barang = '$id'";
+        $result = $link->query($sql);
+        if ($result) {
+            echo 'ok';
+            http_response_code(200);
+        } else {
+            echo 'error';
+            echo $link->error;
+            http_response_code(400);
+        }
+        break;
+
+    case 'tolak-persediaan-produk':
+        $id = $_POST['id'];
+        $alasan = $_POST['alasan'];
+        $sql = "UPDATE permintaan_barang SET status = 'Ditolak', catatan = '$alasan' WHERE id_permintaan_barang = '$id'";
+        $result = $link->query($sql);
+        if ($result) {
+            echo 'ok';
+            http_response_code(200);
+        } else {
+            echo 'error';
+            echo $link->error;
+            http_response_code(400);
+        }
+        break;
 }

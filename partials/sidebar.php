@@ -20,26 +20,20 @@
             <li class="sidebar-menu-group-title">Data Master</li>
             <li>
                 <a href="?page=pengguna">
-                    <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
+                    <iconify-icon icon="mingcute:user-5-line" class="menu-icon"></iconify-icon>
                     <span>Data Pengguna</span>
                 </a>
             </li>
             <li>
                 <a href="?page=produk">
-                    <iconify-icon icon="bi:chat-dots" class="menu-icon"></iconify-icon>
+                    <iconify-icon icon="mingcute:empty-box-line" class="menu-icon"></iconify-icon>
                     <span>Produk</span>
                 </a>
             </li>
             <li>
                 <a href="?page=supplier">
-                    <iconify-icon icon="solar:calendar-outline" class="menu-icon"></iconify-icon>
+                    <iconify-icon icon="mingcute:floating-dust-line" class="menu-icon"></iconify-icon>
                     <span>Supplier</span>
-                </a>
-            </li>
-            <li>
-                <a href="kanban.php">
-                    <iconify-icon icon="material-symbols:map-outline" class="menu-icon"></iconify-icon>
-                    <span>Pesanan Barang</span>
                 </a>
             </li>
 
@@ -47,37 +41,37 @@
 
             <li>
                 <a href="?page=penerimaan-barang">
-                    <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
+                    <iconify-icon icon="mingcute:transfer-line" class="menu-icon"></iconify-icon>
                     <span>Penerimaan Barang</span>
                 </a>
             </li>
             <li>
                 <a href="?page=pengeluaran-barang">
-                    <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
+                    <iconify-icon icon="mingcute:transfer-line" class="menu-icon"></iconify-icon>
                     <span>Pengeluaran Barang</span>
                 </a>
             </li>
             <li>
                 <a href="?page=pengembalian-barang">
-                    <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
+                    <iconify-icon icon="mingcute:transformation-line" class="menu-icon"></iconify-icon>
                     <span>Pengembalian Barang</span>
                 </a>
             </li>
             <li>
                 <a href="?page=purchase-order">
-                    <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
+                    <iconify-icon icon="mingcute:hand-card-line" class="menu-icon"></iconify-icon>
                     <span>Purchase Order</span>
                 </a>
             </li>
             <li>
                 <a href="?page=persediaan-barang">
-                    <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
+                    <iconify-icon icon="mingcute:storage-line" class="menu-icon"></iconify-icon>
                     <span>Persediaan Barang</span>
                 </a>
             </li>
             <li>
                 <a href="?page=stok-minimal">
-                    <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
+                    <iconify-icon icon="mingcute:box-line" class="menu-icon"></iconify-icon>
                     <span>Buffer Stock</span>
                 </a>
             </li>
@@ -86,49 +80,49 @@
 
             <li>
                 <a href="email.php">
-                    <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
+                    <iconify-icon icon="mingcute:chart-horizontal-line" class="menu-icon"></iconify-icon>
                     <span>Laporan Data Pengguna</span>
                 </a>
             </li>
             <li>
                 <a href="email.php">
-                    <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
+                    <iconify-icon icon="mingcute:chart-horizontal-line" class="menu-icon"></iconify-icon>
                     <span>Laporan Data Barang</span>
                 </a>
             </li>
             <li>
                 <a href="email.php">
-                    <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
+                    <iconify-icon icon="mingcute:chart-horizontal-line" class="menu-icon"></iconify-icon>
                     <span>Laporan Data Supplier</span>
                 </a>
             </li>
             <li>
                 <a href="email.php">
-                    <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
+                    <iconify-icon icon="mingcute:chart-horizontal-line" class="menu-icon"></iconify-icon>
                     <span>Penerimaan Barang</span>
                 </a>
             </li>
             <li>
                 <a href="email.php">
-                    <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
+                    <iconify-icon icon="mingcute:chart-horizontal-line" class="menu-icon"></iconify-icon>
                     <span>Pengeluaran Barang</span>
                 </a>
             </li>
             <li>
                 <a href="email.php">
-                    <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
+                    <iconify-icon icon="mingcute:chart-horizontal-line" class="menu-icon"></iconify-icon>
                     <span>Persediaan Barang</span>
                 </a>
             </li>
             <li>
                 <a href="email.php">
-                    <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
+                    <iconify-icon icon="mingcute:chart-horizontal-line" class="menu-icon"></iconify-icon>
                     <span>Stok Barang</span>
                 </a>
             </li>
             <li>
                 <a href="email.php">
-                    <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
+                    <iconify-icon icon="mingcute:chart-horizontal-line" class="menu-icon"></iconify-icon>
                     <span>Return Barang</span>
                 </a>
             </li>
