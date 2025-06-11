@@ -78,7 +78,7 @@
             <li>
                 <a href="?page=stok-minimal">
                     <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
-                    <span>Stok Minimal</span>
+                    <span>Buffer Stock</span>
                 </a>
             </li>
 
