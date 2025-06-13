@@ -1,4 +1,4 @@
-<div class="navbar-header">
+<div class="navbar-header d-print-none">
     <div class="row align-items-center justify-content-between">
         <div class="col-auto">
             <div class="d-flex flex-wrap align-items-center gap-4">

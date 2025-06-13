@@ -112,6 +112,18 @@ if ($result->num_rows > 0) {
             </div>
         </div>
     </div>
+    <div class="alert mt-3 alert-info bg-info-100 text-info-600 border-info-100 px-24 py-11 mb-0 fw-semibold text-lg radius-8 mb-10"
+        role="alert">
+        <div class="d-flex align-items-center justify-content-between text-lg">
+            Rekomendasi Jumlah Permintaan
+            <button class="remove-button text-info-600 text-xxl line-height-1">
+                <iconify-icon icon="iconamoon:sign-times-light" class="icon"></iconify-icon>
+            </button>
+        </div>
+        <p class="fw-medium text-info-600 text-sm mt-8">Perhitungan Jumlah Pesan = (Rata-rata pemakaian harian × Lama
+            pengantaran) + Buffer stock - Stok saat ini
+        </p>
+    </div>
     <button type="submit" class="btn btn-primary mt-3">Simpan</button>
 </form>
 <script>

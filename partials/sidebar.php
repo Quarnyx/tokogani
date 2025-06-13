@@ -79,49 +79,43 @@
             <li class="sidebar-menu-group-title">Laporan</li>
 
             <li>
-                <a href="email.php">
+                <a href="?page=laporan-pengguna">
                     <iconify-icon icon="mingcute:chart-horizontal-line" class="menu-icon"></iconify-icon>
                     <span>Laporan Data Pengguna</span>
                 </a>
             </li>
             <li>
-                <a href="email.php">
+                <a href="?page=laporan-produk">
                     <iconify-icon icon="mingcute:chart-horizontal-line" class="menu-icon"></iconify-icon>
                     <span>Laporan Data Barang</span>
                 </a>
             </li>
             <li>
-                <a href="email.php">
+                <a href="?page=laporan-supplier">
                     <iconify-icon icon="mingcute:chart-horizontal-line" class="menu-icon"></iconify-icon>
                     <span>Laporan Data Supplier</span>
                 </a>
             </li>
             <li>
-                <a href="email.php">
+                <a href="?page=laporan-penerimaan-barang">
                     <iconify-icon icon="mingcute:chart-horizontal-line" class="menu-icon"></iconify-icon>
                     <span>Penerimaan Barang</span>
                 </a>
             </li>
             <li>
-                <a href="email.php">
+                <a href="?page=laporan-pengeluaran-barang">
                     <iconify-icon icon="mingcute:chart-horizontal-line" class="menu-icon"></iconify-icon>
                     <span>Pengeluaran Barang</span>
                 </a>
             </li>
             <li>
-                <a href="email.php">
+                <a href="?page=laporan-persediaan-barang">
                     <iconify-icon icon="mingcute:chart-horizontal-line" class="menu-icon"></iconify-icon>
                     <span>Persediaan Barang</span>
                 </a>
             </li>
             <li>
-                <a href="email.php">
-                    <iconify-icon icon="mingcute:chart-horizontal-line" class="menu-icon"></iconify-icon>
-                    <span>Stok Barang</span>
-                </a>
-            </li>
-            <li>
-                <a href="email.php">
+                <a href="?page=laporan-pengembalian-barang">
                     <iconify-icon icon="mingcute:chart-horizontal-line" class="menu-icon"></iconify-icon>
                     <span>Return Barang</span>
                 </a>
