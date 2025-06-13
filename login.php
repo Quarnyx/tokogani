@@ -44,7 +44,9 @@
     <section class="auth bg-base d-flex flex-wrap">
         <div class="auth-left d-lg-block d-none">
             <div class="d-flex align-items-center flex-column h-100 justify-content-center">
-                <img src="assets/images/auth/auth-img.png" alt="">
+                <div class="w-100 h-100">
+                    <img src="assets/images/gudang.jpg" class="img-fluid w-100 h-100 object-fit-cover" alt="">
+                </div>
             </div>
         </div>
         <div class="auth-right py-32 px-24 d-flex flex-column justify-content-center">
@@ -59,7 +61,7 @@
                             <iconify-icon icon="mage:user"></iconify-icon>
                         </span>
                         <input type="username" class="form-control h-56-px bg-neutral-50 radius-12"
-                            placeholder="username" name="username">
+                            placeholder="Username" name="username">
 
                     </div>
                     <?php

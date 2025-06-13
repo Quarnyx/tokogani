@@ -19,7 +19,7 @@
                 <div class="dropdown">
                     <button class="d-flex justify-content-center align-items-center rounded-circle" type="button"
                         data-bs-toggle="dropdown">
-                        <img src="assets/images/user.png" alt="image"
+                        <img src="assets/images/default.jpg" alt="image"
                             class="w-40-px h-40-px object-fit-cover rounded-circle">
                     </button>
                     <div class="dropdown-menu to-top dropdown-menu-sm">
