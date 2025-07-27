@@ -11,7 +11,7 @@
     </div>
     <div class="sidebar-menu-area">
         <ul class="sidebar-menu" id="sidebar-menu">
-            <?php if (isset($_SESSION['level']) && $_SESSION['level'] == 'Admin') { ?>
+            <?php if (isset($_SESSION['level']) && $_SESSION['level'] == 'Owner') { ?>
                 <li>
                     <a href="?dashboard">
                         <iconify-icon icon="solar:home-smile-angle-outline" class="menu-icon"></iconify-icon>
@@ -124,7 +124,7 @@
                 <?php
             }
             ?>
-            <?php if (isset($_SESSION['level']) && $_SESSION['level'] == 'Gudang') { ?>
+            <?php if (isset($_SESSION['level']) && $_SESSION['level'] == 'Admin Gudang') { ?>
                 <li>
                     <a href="?dashboard">
                         <iconify-icon icon="solar:home-smile-angle-outline" class="menu-icon"></iconify-icon>

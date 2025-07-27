@@ -45,7 +45,7 @@
                 <td>
                     <div class="d-flex flex-wrap align-items-end gap-1">
                         <?php
-                        if ($_SESSION['level'] == 'Admin') { ?>
+                        if ($_SESSION['level'] == 'Owner') { ?>
                             <button id="setujui" data-nama="<?= $row['nama_produk'] ?>"
                                 data-id="<?= $row['id_permintaan_barang'] ?>"
                                 class="btn btn-success-600 radius-8 px-10 py-10 d-flex align-items-center gap-2 text-sm"><iconify-icon
