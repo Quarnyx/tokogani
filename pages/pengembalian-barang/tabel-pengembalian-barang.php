@@ -17,7 +17,7 @@
         <?php
         require_once '../../partials/config.php';
         $no = 1;
-        $sql = "SELECT * FROM v_pengembalian_barang";
+        $sql = "SELECT * FROM v_pengembalian_barang ORDER BY id_barang_kembali DESC";
         $result = $link->query($sql);
         while ($row = $result->fetch_assoc()) {
             ?>

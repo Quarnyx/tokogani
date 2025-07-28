@@ -2,18 +2,28 @@
 require_once '../../partials/config.php';
 switch ($_GET['aksi'] ?? '') {
     case 'tambah-pengembalian-barang':
-        $id_produk = $_POST['id_produk'];
-        $jumlah = $_POST['jumlah'];
+        $id_produk_arr = $_POST['id_produk'];
+        $jumlah_arr = $_POST['jumlah'];
+        $id_supplier_arr = $_POST['id_supplier'];
         $tanggal = $_POST['tanggal'];
-        $id_supplier = $_POST['id_supplier'];
         $keterangan = $_POST['keterangan'];
         $id_pengguna = $_POST['id_pengguna'];
 
-
-        $sql = "INSERT INTO barang_kembali (id_produk, jumlah, tanggal, id_supplier, keterangan, id_pengguna) 
-        VALUES ('$id_produk', '$jumlah', '$tanggal', '$id_supplier', '$keterangan', '$id_pengguna')";
-        $result = $link->query($sql);
-        if ($result) {
+        $success = true;
+        // Insert each row
+        for ($i = 0; $i < count($id_produk_arr); $i++) {
+            $id_produk = $link->real_escape_string($id_produk_arr[$i]);
+            $jumlah = $link->real_escape_string($jumlah_arr[$i]);
+            $id_supplier = $link->real_escape_string($id_supplier_arr[$i]);
+            $sql = "INSERT INTO barang_kembali (id_produk, jumlah, tanggal, id_supplier, keterangan, id_pengguna) 
+                VALUES ('$id_produk', '$jumlah', '$tanggal', '$id_supplier', '$keterangan', '$id_pengguna')";
+            $result = $link->query($sql);
+            if (!$result) {
+                $success = false;
+                break;
+            }
+        }
+        if ($success) {
             echo 'ok';
             http_response_code(200);
         } else {

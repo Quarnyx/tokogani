@@ -1,5 +1,5 @@
 <?php
-$title = 'Data Penerimaan Produk';
+$title = 'Penerimaan Produk';
 $subTitle = 'Penerimaan Produk';
 ?>
 <?php include './partials/breadcrumb.php' ?>
@@ -8,7 +8,7 @@ $subTitle = 'Penerimaan Produk';
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title mb-0">Tabel Penerimaan Purchase Order</h4>
+                <h4 class="card-title mb-0">Tabel Penerimaan Produk Kode PO <?php echo $_GET['kodepo'] ?></h4>
             </div><!-- end card header -->
             <div class="card-body" id="tabel">
             </div>
@@ -22,7 +22,21 @@ $subTitle = 'Penerimaan Produk';
 
 <script>
     function loadTable() {
-        $('#tabel').load('pages/penerimaan-barang/tabel-purchase-order.php');
+        // Ambil parameter dari URL
+        const params = new URLSearchParams(window.location.search);
+        const kodepo = params.get('kodepo');
+        const aksi = params.get('aksi');
+
+        // Tentukan URL file berdasarkan ada tidaknya 'aksi'
+        let page = aksi
+            ? 'pages/penerimaan-barang-detail/tabel-penerimaan-barang-detail.php'
+            : 'pages/penerimaan-barang-detail/tabel-penerimaan-barang.php';
+
+        // Gabungkan URL lengkap
+        let url = page + '?kodepo=' + encodeURIComponent(kodepo ?? '');
+
+        // Load ke elemen dengan id "tabel"
+        $('#tabel').load(url);
     }
     $(document).ready(function () {
         loadTable();

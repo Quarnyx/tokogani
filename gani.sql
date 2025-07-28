@@ -11,7 +11,7 @@
  Target Server Version : 80030 (8.0.30)
  File Encoding         : 65001
 
- Date: 13/07/2025 17:29:07
+ Date: 28/07/2025 20:52:07
 */
 
 SET NAMES utf8mb4;
@@ -35,7 +35,7 @@ CREATE TABLE `barang_keluar`  (
   INDEX `id_pengguna`(`id_pengguna` ASC) USING BTREE,
   CONSTRAINT `barang_keluar_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `barang_keluar_ibfk_3` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 112 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 116 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of barang_keluar
@@ -135,6 +135,10 @@ INSERT INTO `barang_keluar` VALUES (108, '2025-06-12', 24, 2, NULL, '2015-12-18 
 INSERT INTO `barang_keluar` VALUES (109, '2025-06-10', 15, 2, NULL, '2020-12-21 00:19:52', 4, NULL);
 INSERT INTO `barang_keluar` VALUES (110, '2025-07-02', 23, 2, NULL, '2005-10-15 10:20:14', 4, NULL);
 INSERT INTO `barang_keluar` VALUES (111, '2025-07-08', 16, 1, NULL, '2008-11-07 10:43:57', 4, NULL);
+INSERT INTO `barang_keluar` VALUES (112, '2025-07-17', 14, 10, 'u', '2025-07-27 22:37:40', 1, 'u');
+INSERT INTO `barang_keluar` VALUES (113, '2025-07-27', 14, 10, 't', '2025-07-27 22:38:02', 1, 't');
+INSERT INTO `barang_keluar` VALUES (114, '2025-07-28', 7, 20, 'y', '2025-07-28 09:05:41', 1, 'y');
+INSERT INTO `barang_keluar` VALUES (115, '2025-07-28', 7, 2, 'a', '2025-07-28 09:07:43', 1, 'd');
 
 -- ----------------------------
 -- Table structure for barang_kembali
@@ -155,11 +159,16 @@ CREATE TABLE `barang_kembali`  (
   CONSTRAINT `barang_kembali_ibfk_1` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `barang_kembali_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `barang_kembali_ibfk_3` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of barang_kembali
 -- ----------------------------
+INSERT INTO `barang_kembali` VALUES (3, 7, 'keras', '2025-07-30', 1, 2, 1);
+INSERT INTO `barang_kembali` VALUES (5, 13, 'expired', '2025-07-21', 1, 3, 7);
+INSERT INTO `barang_kembali` VALUES (6, 15, 'expired', '2025-07-21', 1, 2, 2);
+INSERT INTO `barang_kembali` VALUES (7, 8, 'sfsf', '2025-07-28', 1, 3, 3);
+INSERT INTO `barang_kembali` VALUES (8, 7, 'sfsf', '2025-07-28', 1, 2, 2);
 
 -- ----------------------------
 -- Table structure for barang_masuk
@@ -174,6 +183,7 @@ CREATE TABLE `barang_masuk`  (
   `id_supplier` int NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `id_pengguna` int NULL DEFAULT NULL,
+  `no_po` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_barang_masuk`) USING BTREE,
   INDEX `id_produk`(`id_produk` ASC) USING BTREE,
   INDEX `id_pengguna`(`id_pengguna` ASC) USING BTREE,
@@ -181,30 +191,32 @@ CREATE TABLE `barang_masuk`  (
   CONSTRAINT `barang_masuk_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `barang_masuk_ibfk_3` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `barang_masuk_ibfk_4` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of barang_masuk
 -- ----------------------------
-INSERT INTO `barang_masuk` VALUES (8, '2025-06-02', 13, 24, NULL, 3, '2008-11-18 17:48:22', 4);
-INSERT INTO `barang_masuk` VALUES (9, '2025-06-01', 22, 33, NULL, 2, '2001-12-09 11:19:48', 1);
-INSERT INTO `barang_masuk` VALUES (10, '2025-06-02', 18, 34, NULL, 2, '2020-05-13 12:29:05', 1);
-INSERT INTO `barang_masuk` VALUES (11, '2025-06-01', 14, 29, NULL, 2, '2012-03-08 11:45:20', 4);
-INSERT INTO `barang_masuk` VALUES (12, '2025-06-02', 21, 46, NULL, 2, '2006-01-19 11:10:51', 1);
-INSERT INTO `barang_masuk` VALUES (13, '2025-06-02', 23, 29, NULL, 2, '2020-05-15 10:19:50', 4);
-INSERT INTO `barang_masuk` VALUES (14, '2025-06-02', 19, 26, NULL, 3, '2004-12-07 16:16:09', 1);
-INSERT INTO `barang_masuk` VALUES (15, '2025-06-02', 11, 32, NULL, 2, '2024-08-30 12:32:29', 4);
-INSERT INTO `barang_masuk` VALUES (16, '2025-06-01', 12, 22, NULL, 2, '2002-01-10 14:54:34', 1);
-INSERT INTO `barang_masuk` VALUES (17, '2025-06-02', 9, 19, NULL, 3, '2019-05-15 11:55:38', 4);
-INSERT INTO `barang_masuk` VALUES (18, '2025-06-01', 24, 46, NULL, 2, '2017-02-08 16:47:22', 1);
-INSERT INTO `barang_masuk` VALUES (19, '2025-06-01', 17, 49, NULL, 2, '2015-08-05 13:48:42', 1);
-INSERT INTO `barang_masuk` VALUES (20, '2025-06-01', 10, 14, NULL, 2, '2010-09-16 15:38:27', 4);
-INSERT INTO `barang_masuk` VALUES (21, '2025-06-02', 20, 42, NULL, 2, '2005-12-09 14:46:56', 1);
-INSERT INTO `barang_masuk` VALUES (22, '2025-06-02', 16, 16, NULL, 3, '2007-11-24 09:43:39', 4);
-INSERT INTO `barang_masuk` VALUES (23, '2025-06-02', 7, 32, NULL, 2, '2015-01-19 10:49:24', 4);
-INSERT INTO `barang_masuk` VALUES (24, '2025-06-01', 8, 49, NULL, 2, '2024-06-12 13:43:14', 1);
-INSERT INTO `barang_masuk` VALUES (25, '2025-06-02', 15, 29, NULL, 3, '2003-03-10 16:04:09', 4);
-INSERT INTO `barang_masuk` VALUES (26, '2025-06-02', 25, 25, NULL, 2, '2020-08-24 16:20:55', 4);
+INSERT INTO `barang_masuk` VALUES (8, '2025-06-02', 13, 24, NULL, 3, '2008-11-18 17:48:22', 4, NULL);
+INSERT INTO `barang_masuk` VALUES (9, '2025-06-01', 22, 33, NULL, 2, '2001-12-09 11:19:48', 1, NULL);
+INSERT INTO `barang_masuk` VALUES (10, '2025-06-02', 18, 34, NULL, 2, '2020-05-13 12:29:05', 1, NULL);
+INSERT INTO `barang_masuk` VALUES (11, '2025-06-01', 14, 29, NULL, 2, '2012-03-08 11:45:20', 4, NULL);
+INSERT INTO `barang_masuk` VALUES (12, '2025-06-02', 21, 46, NULL, 2, '2006-01-19 11:10:51', 1, NULL);
+INSERT INTO `barang_masuk` VALUES (13, '2025-06-02', 23, 29, NULL, 2, '2020-05-15 10:19:50', 4, NULL);
+INSERT INTO `barang_masuk` VALUES (14, '2025-06-02', 19, 26, NULL, 3, '2004-12-07 16:16:09', 1, NULL);
+INSERT INTO `barang_masuk` VALUES (15, '2025-06-02', 11, 32, NULL, 2, '2024-08-30 12:32:29', 4, NULL);
+INSERT INTO `barang_masuk` VALUES (16, '2025-06-01', 12, 22, NULL, 2, '2002-01-10 14:54:34', 1, NULL);
+INSERT INTO `barang_masuk` VALUES (17, '2025-06-02', 9, 19, NULL, 3, '2019-05-15 11:55:38', 4, NULL);
+INSERT INTO `barang_masuk` VALUES (18, '2025-06-01', 24, 46, NULL, 2, '2017-02-08 16:47:22', 1, NULL);
+INSERT INTO `barang_masuk` VALUES (19, '2025-06-01', 17, 49, NULL, 2, '2015-08-05 13:48:42', 1, NULL);
+INSERT INTO `barang_masuk` VALUES (20, '2025-06-01', 10, 14, NULL, 2, '2010-09-16 15:38:27', 4, NULL);
+INSERT INTO `barang_masuk` VALUES (21, '2025-06-02', 20, 42, NULL, 2, '2005-12-09 14:46:56', 1, NULL);
+INSERT INTO `barang_masuk` VALUES (22, '2025-06-02', 16, 16, NULL, 3, '2007-11-24 09:43:39', 4, NULL);
+INSERT INTO `barang_masuk` VALUES (23, '2025-06-02', 7, 32, NULL, 2, '2015-01-19 10:49:24', 4, NULL);
+INSERT INTO `barang_masuk` VALUES (24, '2025-06-01', 8, 49, NULL, 2, '2024-06-12 13:43:14', 1, NULL);
+INSERT INTO `barang_masuk` VALUES (25, '2025-06-02', 15, 29, NULL, 3, '2003-03-10 16:04:09', 4, NULL);
+INSERT INTO `barang_masuk` VALUES (26, '2025-06-02', 25, 25, NULL, 2, '2020-08-24 16:20:55', 4, NULL);
+INSERT INTO `barang_masuk` VALUES (35, '2025-07-29', 7, 2, 'AA--12123', 2, '2025-07-28 15:22:14', 1, 'PO-001');
+INSERT INTO `barang_masuk` VALUES (36, '2025-07-29', 8, 3, 'AA--12123', 2, '2025-07-28 15:22:15', 1, 'PO-001');
 
 -- ----------------------------
 -- Table structure for pengguna
@@ -215,15 +227,15 @@ CREATE TABLE `pengguna`  (
   `nama_pengguna` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `level` enum('Admin','Gudang') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `level` enum('Owner','Admin Gudang') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_pengguna`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pengguna
 -- ----------------------------
-INSERT INTO `pengguna` VALUES (1, 'Administrasi', 'admin', '0192023a7bbd73250516f069df18b500', 'Admin');
-INSERT INTO `pengguna` VALUES (4, 'Yanto', 'yanto', 'b5d8b455512443450de17c04c4ef3b36', 'Gudang');
+INSERT INTO `pengguna` VALUES (1, 'Administrasi', 'admin', '0192023a7bbd73250516f069df18b500', 'Owner');
+INSERT INTO `pengguna` VALUES (4, 'Yanto', 'yanto', 'b5d8b455512443450de17c04c4ef3b36', 'Admin Gudang');
 
 -- ----------------------------
 -- Table structure for permintaan_barang
@@ -242,7 +254,7 @@ CREATE TABLE `permintaan_barang`  (
   INDEX `id_pengguna`(`id_pengguna` ASC) USING BTREE,
   CONSTRAINT `permintaan_barang_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `permintaan_barang_ibfk_3` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of permintaan_barang
@@ -261,11 +273,15 @@ CREATE TABLE `po_detail`  (
   INDEX `id_produk`(`id_produk` ASC) USING BTREE,
   INDEX `id_purchase_order`(`no_po` ASC) USING BTREE,
   CONSTRAINT `po_detail_ibfk_1` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of po_detail
 -- ----------------------------
+INSERT INTO `po_detail` VALUES (7, 'PO-001', 7, 2);
+INSERT INTO `po_detail` VALUES (8, 'PO-001', 8, 3);
+INSERT INTO `po_detail` VALUES (9, 'PO-002', 7, 100);
+INSERT INTO `po_detail` VALUES (10, 'PO-002', 9, 100);
 
 -- ----------------------------
 -- Table structure for produk
@@ -283,21 +299,21 @@ CREATE TABLE `produk`  (
   `harga_beli` decimal(15, 2) NULL DEFAULT NULL,
   `harga_jual` decimal(15, 2) NULL DEFAULT NULL,
   PRIMARY KEY (`id_produk`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of produk
 -- ----------------------------
-INSERT INTO `produk` VALUES (7, 'No Drop Tinting', 'PRDK-001', 'kg', 10, '5', '2025-07-13 17:15:15', '2025-07-13 17:15:15', 50000.00, 65000.00);
+INSERT INTO `produk` VALUES (7, 'No Drop Tinting', 'PRDK-001', 'kg', 201, '63', '2025-07-13 17:15:15', '2025-07-28 20:47:52', 50000.00, 65000.00);
 INSERT INTO `produk` VALUES (8, 'No Drop 4 kg', 'PRDK-002', 'kg', 10, '5', '2025-07-13 17:15:15', '2025-07-13 17:15:15', 80000.00, 95000.00);
-INSERT INTO `produk` VALUES (9, 'Decolith 5kg', 'PRDK-003', 'kg', 10, '5', '2025-07-13 17:15:15', '2025-07-13 17:15:15', 60000.00, 75000.00);
+INSERT INTO `produk` VALUES (9, 'Decolith 5kg', 'PRDK-003', 'kg', 19, '32', '2025-07-13 17:15:15', '2025-07-28 09:29:28', 60000.00, 75000.00);
 INSERT INTO `produk` VALUES (10, 'No Brand 1kg', 'PRDK-004', 'kg', 10, '5', '2025-07-13 17:15:15', '2025-07-13 17:15:15', 30000.00, 45000.00);
 INSERT INTO `produk` VALUES (11, 'No Brand Acrylic Emulsion Paint', 'PRDK-005', 'kg', 10, '5', '2025-07-13 17:15:15', '2025-07-13 17:15:15', 40000.00, 55000.00);
 INSERT INTO `produk` VALUES (12, 'Lippo Super Glass Synthetic Paint', 'PRDK-006', 'kg', 10, '5', '2025-07-13 17:15:15', '2025-07-13 17:15:15', 70000.00, 85000.00);
 INSERT INTO `produk` VALUES (13, 'Pillar Emulsion Wall Paint', 'PRDK-007', 'kg', 10, '5', '2025-07-13 17:15:15', '2025-07-13 17:15:15', 65000.00, 80000.00);
-INSERT INTO `produk` VALUES (14, 'Pillar Interior', 'PRDK-008', 'kg', 10, '5', '2025-07-13 17:15:15', '2025-07-13 17:15:15', 60000.00, 75000.00);
+INSERT INTO `produk` VALUES (14, 'Pillar Interior', 'PRDK-008', 'kg', 64, '56', '2025-07-13 17:15:15', '2025-07-28 20:49:09', 60000.00, 75000.00);
 INSERT INTO `produk` VALUES (15, 'Lippo Alkaseal', 'PRDK-009', 'kg', 10, '5', '2025-07-13 17:15:15', '2025-07-13 17:15:15', 50000.00, 65000.00);
-INSERT INTO `produk` VALUES (16, 'Nu Colour 25kg', 'PRDK-010', 'kg', 41, '20', '2025-07-13 17:15:15', '2025-07-13 17:27:37', 250000.00, 275000.00);
+INSERT INTO `produk` VALUES (16, 'Nu Colour 25kg', 'PRDK-010', 'kg', 3, '7', '2025-07-13 17:15:15', '2025-07-28 20:48:40', 250000.00, 275000.00);
 INSERT INTO `produk` VALUES (17, 'Nu Colour Exterior', 'PRDK-011', 'kg', 10, '5', '2025-07-13 17:15:15', '2025-07-13 17:15:15', 240000.00, 265000.00);
 INSERT INTO `produk` VALUES (18, 'Vinotex 5kg', 'PRDK-012', 'kg', 10, '5', '2025-07-13 17:15:15', '2025-07-13 17:15:15', 65000.00, 80000.00);
 INSERT INTO `produk` VALUES (19, 'Avitex 1kg', 'PRDK-013', 'kg', 10, '5', '2025-07-13 17:15:15', '2025-07-13 17:15:15', 30000.00, 45000.00);
@@ -324,11 +340,13 @@ CREATE TABLE `purchase_order`  (
   INDEX `id_pengguna`(`id_pengguna` ASC) USING BTREE,
   CONSTRAINT `purchase_order_ibfk_2` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `purchase_order_ibfk_3` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of purchase_order
 -- ----------------------------
+INSERT INTO `purchase_order` VALUES (4, 'PO-001', '2025-07-28', 2, 'Diterima', 1);
+INSERT INTO `purchase_order` VALUES (5, 'PO-002', '2025-07-28', 2, 'Dipesan', 1);
 
 -- ----------------------------
 -- Table structure for supplier
@@ -342,7 +360,7 @@ CREATE TABLE `supplier`  (
   `lama_pengantaran_maksimal` int NULL DEFAULT NULL,
   `avg_lama_pengantaran` int NULL DEFAULT NULL,
   PRIMARY KEY (`id_supplier`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of supplier
@@ -354,13 +372,13 @@ INSERT INTO `supplier` VALUES (3, 'PT Roda Maju', 'Tangerang', '082525525252', 1
 -- View structure for v_detail_po
 -- ----------------------------
 DROP VIEW IF EXISTS `v_detail_po`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_detail_po` AS select `po_detail`.`id_po_detail` AS `id_po_detail`,`po_detail`.`id_produk` AS `id_produk`,`po_detail`.`jumlah` AS `jumlah`,`produk`.`nama_produk` AS `nama_produk`,`po_detail`.`no_po` AS `no_po`,`produk`.`harga_beli` AS `harga_beli` from (`po_detail` join `produk` on((`po_detail`.`id_produk` = `produk`.`id_produk`)));
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_detail_po` AS select `po_detail`.`id_po_detail` AS `id_po_detail`,`po_detail`.`id_produk` AS `id_produk`,`po_detail`.`jumlah` AS `jumlah`,`produk`.`nama_produk` AS `nama_produk`,`po_detail`.`no_po` AS `no_po`,`produk`.`harga_beli` AS `harga_beli`,`produk`.`kode_produk` AS `kode_produk`,`produk`.`satuan` AS `satuan` from (`po_detail` join `produk` on((`po_detail`.`id_produk` = `produk`.`id_produk`)));
 
 -- ----------------------------
 -- View structure for v_penerimaan_barang
 -- ----------------------------
 DROP VIEW IF EXISTS `v_penerimaan_barang`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_penerimaan_barang` AS select `barang_masuk`.`id_barang_masuk` AS `id_barang_masuk`,`barang_masuk`.`tanggal` AS `tanggal`,`barang_masuk`.`id_produk` AS `id_produk`,`barang_masuk`.`jumlah` AS `jumlah`,`barang_masuk`.`no_surat_jalan` AS `no_surat_jalan`,`barang_masuk`.`id_supplier` AS `id_supplier`,`barang_masuk`.`created_at` AS `created_at`,`barang_masuk`.`id_pengguna` AS `id_pengguna`,`pengguna`.`nama_pengguna` AS `nama_pengguna`,`supplier`.`nama_supplier` AS `nama_supplier`,`produk`.`nama_produk` AS `nama_produk`,`produk`.`kode_produk` AS `kode_produk`,`produk`.`satuan` AS `satuan` from (((`barang_masuk` join `pengguna` on((`barang_masuk`.`id_pengguna` = `pengguna`.`id_pengguna`))) join `produk` on((`barang_masuk`.`id_produk` = `produk`.`id_produk`))) join `supplier` on((`barang_masuk`.`id_supplier` = `supplier`.`id_supplier`)));
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_penerimaan_barang` AS select `barang_masuk`.`id_barang_masuk` AS `id_barang_masuk`,`barang_masuk`.`tanggal` AS `tanggal`,`barang_masuk`.`id_produk` AS `id_produk`,`barang_masuk`.`jumlah` AS `jumlah`,`barang_masuk`.`no_surat_jalan` AS `no_surat_jalan`,`barang_masuk`.`id_supplier` AS `id_supplier`,`barang_masuk`.`created_at` AS `created_at`,`barang_masuk`.`id_pengguna` AS `id_pengguna`,`pengguna`.`nama_pengguna` AS `nama_pengguna`,`supplier`.`nama_supplier` AS `nama_supplier`,`produk`.`nama_produk` AS `nama_produk`,`produk`.`kode_produk` AS `kode_produk`,`produk`.`satuan` AS `satuan`,`barang_masuk`.`no_po` AS `no_po` from (((`barang_masuk` join `pengguna` on((`barang_masuk`.`id_pengguna` = `pengguna`.`id_pengguna`))) join `produk` on((`barang_masuk`.`id_produk` = `produk`.`id_produk`))) join `supplier` on((`barang_masuk`.`id_supplier` = `supplier`.`id_supplier`)));
 
 -- ----------------------------
 -- View structure for v_pengeluaran_barang

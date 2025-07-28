@@ -118,7 +118,7 @@
                 <li>
                     <a href="?page=laporan-pengembalian-barang">
                         <iconify-icon icon="mingcute:chart-horizontal-line" class="menu-icon"></iconify-icon>
-                        <span>Return Barang</span>
+                        <span>Laporan Pengembalian Barang</span>
                     </a>
                 </li>
                 <?php

@@ -23,12 +23,16 @@ switch ($_GET['aksi'] ?? '') {
         }
         break;
     case 'hapus-penerimaan-barang':
-        $id = $_POST['id'];
-        $sql = "DELETE FROM barang_masuk WHERE id_barang_masuk = '$id'";
+        $kodepo = $_POST['kodepo'];
+        $sql = "DELETE FROM barang_masuk WHERE no_po = '$kodepo'";
         $result = $link->query($sql);
+        // update status PO menjadi 'Dipesan'
+        $sqlUpdate = "UPDATE purchase_order SET status = 'Dipesan' WHERE no_po = '$kodepo'";
+        $link->query($sqlUpdate);
         if ($result) {
             echo 'ok';
             http_response_code(200);
+            header("Location: ../../index.php?page=penerimaan-barang");
         } else {
             echo 'error';
             echo $link->error;
