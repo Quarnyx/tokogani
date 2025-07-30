@@ -165,6 +165,12 @@
                         <span>Buffer Stock</span>
                     </a>
                 </li>
+                <li>
+                    <a href="?page=purchase-order">
+                        <iconify-icon icon="mingcute:hand-card-line" class="menu-icon"></iconify-icon>
+                        <span>Purchase Order</span>
+                    </a>
+                </li>
 
                 <li class="sidebar-menu-group-title">Laporan</li>
 

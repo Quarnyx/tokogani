@@ -7,10 +7,10 @@ $subTitle = 'Persediaan Produk';
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header ">
                 <h4 class="card-title mb-0">Tabel Persediaan Produk</h4>
             </div><!-- end card header -->
-            <div class="card-body" id="tabel">
+            <div class="card-body overflow-auto" id="tabel">
             </div>
             <!-- end card body -->
         </div>

@@ -2,6 +2,7 @@
     <thead>
         <tr>
             <th>No</th>
+            <th>Kode PO</th>
             <th>Kode Barang</th>
             <th>Nama Barang</th>
             <th>Jumlah</th>
@@ -23,6 +24,7 @@
             ?>
             <tr>
                 <td><?= $no++ ?></td>
+                <td><?= $row['no_po'] ?></td>
                 <td><?= $row['kode_produk'] ?></td>
                 <td><?= $row['nama_produk'] ?></td>
                 <td><?= $row['jumlah'] ?></td>

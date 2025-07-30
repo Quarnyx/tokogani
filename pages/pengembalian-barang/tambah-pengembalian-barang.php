@@ -1,22 +1,23 @@
 <form id="tambah-barang" enctype="multipart/form-data">
     <?php session_start(); ?>
     <input type="hidden" name="id_pengguna" value="<?= $_SESSION['id_pengguna'] ?>">
+    <input type="hidden" name="no_po" value="<?= $_GET['no_po'] ?>">
     <div class="d-grid gap-3">
         <div id="barang-rows">
             <div class="row barang-row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <label for="id_produk_0" class="form-label">Nama Barang</label>
                     <select class="form-select" name="id_produk[]" id="id_produk_0" data-trigger="">
                         <option value="">Pilih Barang</option>
                         <?php
                         include "../../partials/config.php";
-                        $sql = "SELECT * FROM v_stok WHERE stok_tersedia > 0";
+                        $sql = "SELECT * FROM v_penerimaan_barang WHERE no_po = '" . $_GET['no_po'] . "'";
                         $result = $link->query($sql);
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
                                 ?>
                                 <option value="<?= $row['id_produk'] ?>">
-                                    <?= $row['nama_produk'] ?> - Stok <?= $row['stok_tersedia'] ?>
+                                    <?= $row['nama_produk'] ?> - Jumlah diterima <?= $row['jumlah'] ?>
                                 </option>
                                 <?php
                             }
@@ -24,15 +25,15 @@
                         ?>
                     </select>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <label for="jumlah_0" class="form-label">Jumlah</label>
                     <input type="number" class="form-control" name="jumlah[]" id="jumlah_0" placeholder="Jumlah">
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label for="id_supplier_0" class="form-label">Supplier</label>
                     <select class="form-select" name="id_supplier[]" id="id_supplier_0" data-trigger="">
                         <?php
-                        $sql = "SELECT * FROM supplier";
+                        $sql = "SELECT * FROM v_penerimaan_barang WHERE no_po = '" . $_GET['no_po'] . "' GROUP BY id_supplier";
                         $result = $link->query($sql);
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
@@ -67,23 +68,23 @@
 </form>
 <script>
     $(document).ready(function () {
-        new Selectr('.form-select');
+        new Selectr('.form-selectable');
     });
 
     var barangRowHtml = `
     <div class="row barang-row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <label class="form-label">Nama Barang</label>
-            <select class="form-select" name="id_produk[]" data-trigger="">
+            <select class="form-select form-selectable" name="id_produk[]" data-trigger="">
                 <option value="">Pilih Barang</option>
                 <?php
-                $sql = "SELECT * FROM v_stok WHERE stok_tersedia > 0";
+                $sql = "SELECT * FROM v_penerimaan_barang WHERE no_po = '" . $_GET['no_po'] . "'";
                 $result = $link->query($sql);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         ?>
                         <option value="<?= $row['id_produk'] ?>">
-                            <?= $row['nama_produk'] ?> - Stok <?= $row['stok_tersedia'] ?>
+                            <?= $row['nama_produk'] ?> - Jumlah diterima <?= $row['jumlah'] ?>
                         </option>
                         <?php
                     }
@@ -91,15 +92,15 @@
                 ?>
             </select>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <label class="form-label">Jumlah</label>
             <input type="number" class="form-control" name="jumlah[]" placeholder="Jumlah">
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <label class="form-label">Supplier</label>
             <select class="form-select" name="id_supplier[]" data-trigger="">
                 <?php
-                $sql = "SELECT * FROM supplier";
+                $sql = "SELECT * FROM v_penerimaan_barang WHERE no_po = '" . $_GET['no_po'] . "' GROUP BY id_supplier";
                 $result = $link->query($sql);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
@@ -120,7 +121,7 @@
     // Add new row
     $('#add-row').click(function () {
         $('#barang-rows').append(barangRowHtml);
-        new Selectr($('#barang-rows .barang-row:last .form-select')[0]);
+        new Selectr($('#barang-rows .barang-row:last .form-select .form-selectable')[0]);
         $('#barang-rows .barang-row').find('.btn-remove-row').show();
     });
 

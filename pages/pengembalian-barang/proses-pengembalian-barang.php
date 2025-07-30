@@ -8,6 +8,7 @@ switch ($_GET['aksi'] ?? '') {
         $tanggal = $_POST['tanggal'];
         $keterangan = $_POST['keterangan'];
         $id_pengguna = $_POST['id_pengguna'];
+        $no_po = $_POST['no_po'];
 
         $success = true;
         // Insert each row
@@ -15,8 +16,8 @@ switch ($_GET['aksi'] ?? '') {
             $id_produk = $link->real_escape_string($id_produk_arr[$i]);
             $jumlah = $link->real_escape_string($jumlah_arr[$i]);
             $id_supplier = $link->real_escape_string($id_supplier_arr[$i]);
-            $sql = "INSERT INTO barang_kembali (id_produk, jumlah, tanggal, id_supplier, keterangan, id_pengguna) 
-                VALUES ('$id_produk', '$jumlah', '$tanggal', '$id_supplier', '$keterangan', '$id_pengguna')";
+            $sql = "INSERT INTO barang_kembali (id_produk, jumlah, tanggal, id_supplier, keterangan, id_pengguna, no_po) 
+                VALUES ('$id_produk', '$jumlah', '$tanggal', '$id_supplier', '$keterangan', '$id_pengguna', '$no_po')";
             $result = $link->query($sql);
             if (!$result) {
                 $success = false;
