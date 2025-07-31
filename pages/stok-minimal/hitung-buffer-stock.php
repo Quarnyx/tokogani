@@ -15,8 +15,7 @@ if ($result->num_rows > 0) {
         </button>
     </div>
     <p class="fw-medium text-info-600 text-sm mt-8">
-        Buffer Stock = (Pengeluaran maksimum selama 30 hari × Maksimum pengantaran)
-        - (Rata-rata pengeluaran harian selama 30 hari × Pengantaran normal)<br>
+        Buffer Stock = (Pengantaran Terlama - Pengantaran Normal) x Rata-rata pengeluaran harian<br>
         Stok Minimal = Rata-rata pengeluaran harian selama 30 hari × Pengantaran normal
     </p>
 </div>
@@ -132,7 +131,7 @@ if ($result->num_rows > 0) {
         $('#lama_pengantaran').val(lamaPengantaran);
         $('#pengantaran_maksimal').val(pengantaranMaksimal);
         // hitung buffer stock
-        var bufferStock = (pengantaranMaksimal * maxHarian) - (avgHarian * lamaPengantaran);
+        var bufferStock = (pengantaranMaksimal - lamaPengantaran) * avgHarian;
         $('#buffer_stock').val(bufferStock);
         // hitung stok minimal
         var stokMinimal = avgHarian * lamaPengantaran;
