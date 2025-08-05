@@ -13,11 +13,18 @@ switch ($_GET['aksi'] ?? '') {
         $success = true;
         // Insert each row
         for ($i = 0; $i < count($id_produk_arr); $i++) {
+            // cari id_barang_masuk dengan no_po dan id_produk
+            $sql = "SELECT id_barang_masuk FROM barang_masuk WHERE no_po = '$no_po' AND id_produk = '{$id_produk_arr[$i]}'";
+            $result = $link->query($sql);
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $id_barang_masuk = $row['id_barang_masuk'];
+            }
             $id_produk = $link->real_escape_string($id_produk_arr[$i]);
             $jumlah = $link->real_escape_string($jumlah_arr[$i]);
             $id_supplier = $link->real_escape_string($id_supplier_arr[$i]);
-            $sql = "INSERT INTO barang_kembali (id_produk, jumlah, tanggal, id_supplier, keterangan, id_pengguna, no_po) 
-                VALUES ('$id_produk', '$jumlah', '$tanggal', '$id_supplier', '$keterangan', '$id_pengguna', '$no_po')";
+            $sql = "INSERT INTO barang_kembali (id_produk, jumlah, tanggal, id_supplier, keterangan, id_pengguna, no_po, id_barang_masuk) 
+                VALUES ('$id_produk', '$jumlah', '$tanggal', '$id_supplier', '$keterangan', '$id_pengguna', '$no_po', '$id_barang_masuk')";
             $result = $link->query($sql);
             if (!$result) {
                 $success = false;

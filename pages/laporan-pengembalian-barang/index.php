@@ -97,12 +97,12 @@ $subTitle = 'Pengembalian Produk';
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Kode Barang</th>
+                                <th>No. Surat Masuk</th>
+                                <th>Tanggal Masuk</th>
                                 <th>Nama Barang</th>
-                                <th>Jumlah</th>
+                                <th>Jumlah Masuk</th>
+                                <th>Jumlah Keluar</th>
                                 <th>Satuan</th>
-                                <th>Tanggal</th>
-                                <th>Supplier</th>
                                 <th>Keterangan</th>
                                 <th>PIC</th>
                             </tr>
@@ -117,12 +117,12 @@ $subTitle = 'Pengembalian Produk';
                                 ?>
                                 <tr>
                                     <td><?= $no++ ?></td>
-                                    <td><?= $row['kode_produk'] ?></td>
+                                    <td><?= $row['no_surat_jalan'] ?></td>
+                                    <td><?= $row['tanggal_masuk'] ?></td>
                                     <td><?= $row['nama_produk'] ?></td>
+                                    <td><?= $row['jumlah_masuk'] ?></td>
                                     <td><?= $row['jumlah'] ?></td>
                                     <td><?= $row['satuan'] ?></td>
-                                    <td><?= $row['tanggal'] ?></td>
-                                    <td><?= $row['nama_supplier'] ?></td>
                                     <td><?= $row['keterangan'] ?></td>
                                     <td><?= $row['nama_pengguna'] ?></td>
                                 </tr>

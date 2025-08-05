@@ -97,7 +97,7 @@ $subTitle = 'Penerimaan Produk';
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Kode Barang</th>
+                                <th>No Surat Jalan</th>
                                 <th>Nama Barang</th>
                                 <th>Jumlah</th>
                                 <th>Satuan</th>
@@ -117,7 +117,7 @@ $subTitle = 'Penerimaan Produk';
                                 ?>
                                 <tr>
                                     <td><?= $no++ ?></td>
-                                    <td><?= $row['kode_produk'] ?></td>
+                                    <td><?= $row['no_surat_jalan'] ?></td>
                                     <td><?= $row['nama_produk'] ?></td>
                                     <td><?= $row['jumlah'] ?></td>
                                     <td><?= $row['satuan'] ?></td>
