@@ -111,7 +111,7 @@ $subTitle = 'Pengembalian Produk';
                             <?php
                             require_once '././partials/config.php';
                             $no = 1;
-                            $sql = "SELECT * FROM v_pengembalian_barang where tanggal between '$daritanggal' and '$sampaitanggal'";
+                            $sql = "SELECT * FROM v_pengembalian_barang where tanggal between '$daritanggal' and '$sampaitanggal' ORDER BY no_surat_jalan";
                             $result = $link->query($sql);
                             while ($row = $result->fetch_assoc()) {
                                 ?>

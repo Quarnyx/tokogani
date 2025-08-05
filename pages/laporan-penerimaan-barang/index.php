@@ -103,7 +103,6 @@ $subTitle = 'Penerimaan Produk';
                                 <th>Satuan</th>
                                 <th>Tanggal Masuk</th>
                                 <th>Supplier</th>
-                                <th>No. Surat Jalan</th>
                                 <th>PIC</th>
                             </tr>
                         </thead>
@@ -111,7 +110,7 @@ $subTitle = 'Penerimaan Produk';
                             <?php
                             require_once '././partials/config.php';
                             $no = 1;
-                            $sql = "SELECT * FROM v_penerimaan_barang WHERE tanggal BETWEEN '$daritanggal' AND '$sampaitanggal'";
+                            $sql = "SELECT * FROM v_penerimaan_barang WHERE tanggal BETWEEN '$daritanggal' AND '$sampaitanggal' ORDER BY no_surat_jalan ASC";
                             $result = $link->query($sql);
                             while ($row = $result->fetch_assoc()) {
                                 ?>
@@ -123,7 +122,6 @@ $subTitle = 'Penerimaan Produk';
                                     <td><?= $row['satuan'] ?></td>
                                     <td><?= $row['tanggal'] ?></td>
                                     <td><?= $row['nama_supplier'] ?></td>
-                                    <td><?= $row['no_surat_jalan'] ?></td>
                                     <td><?= $row['nama_pengguna'] ?></td>
 
                                 </tr>
