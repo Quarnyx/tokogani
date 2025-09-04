@@ -7,6 +7,7 @@
                     <thead>
                         <tr>
                             <th>Kode</th>
+                            <th>Kode Barang</th>
                             <th>Nama Barang</th>
                             <th>Harga Beli</th>
                             <th>Jumlah</th>
@@ -26,6 +27,7 @@
                             ?>
                             <tr>
                                 <td><?= $data['no_po'] ?></td>
+                                <td><?= $data['kode_produk'] ?></td>
                                 <td><?= $data['nama_produk'] ?></td>
                                 <td>Rp. <?= number_format($data['harga_beli'], 0, ',', '.') ?></td>
                                 <td><?= $data['jumlah'] ?></td>
