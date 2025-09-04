@@ -54,7 +54,6 @@ function tanggal($tanggal)
                             <th>Harga Beli</th>
                             <th>Harga Jual</th>
                             <th>Buffer Stock</th>
-                            <th>Minimum Stock</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,7 +72,6 @@ function tanggal($tanggal)
                                 <td>Rp <?= number_format($row['harga_beli'], 0, ',', '.') ?></td>
                                 <td>Rp <?= number_format($row['harga_jual'], 0, ',', '.') ?></td>
                                 <td><?= $row['buffer_stock'] ?></td>
-                                <td><?= $row['minimum_stock'] ?></td>
                             </tr>
                             <?php
                         }
@@ -81,6 +79,13 @@ function tanggal($tanggal)
                     </tbody>
                 </table>
 
+                <div class="mt-3" style="text-align:end;">
+                    <hr>
+                    <p class="font-weight-bold">Kendal, <?= tanggal(date('Y-m-d')) ?><br></p>
+                    <div class="mt-5">
+                        <p class="font-weight-bold">Abdul Ghani</p>
+                    </div>
+                </div>
 
                 <div class="mt-4 mb-1">
                     <div class="text-end d-print-none">

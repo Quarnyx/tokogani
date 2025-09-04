@@ -4,7 +4,7 @@ switch ($_GET['aksi'] ?? '') {
     case 'tambah-pengembalian-barang':
         $id_produk_arr = $_POST['id_produk'];
         $jumlah_arr = $_POST['jumlah'];
-        $id_supplier_arr = $_POST['id_supplier'];
+        $id_supplier = $_POST['id_supplier'];
         $tanggal = $_POST['tanggal'];
         $keterangan = $_POST['keterangan'];
         $id_pengguna = $_POST['id_pengguna'];
@@ -22,7 +22,6 @@ switch ($_GET['aksi'] ?? '') {
             }
             $id_produk = $link->real_escape_string($id_produk_arr[$i]);
             $jumlah = $link->real_escape_string($jumlah_arr[$i]);
-            $id_supplier = $link->real_escape_string($id_supplier_arr[$i]);
             $sql = "INSERT INTO barang_kembali (id_produk, jumlah, tanggal, id_supplier, keterangan, id_pengguna, no_po, id_barang_masuk) 
                 VALUES ('$id_produk', '$jumlah', '$tanggal', '$id_supplier', '$keterangan', '$id_pengguna', '$no_po', '$id_barang_masuk')";
             $result = $link->query($sql);

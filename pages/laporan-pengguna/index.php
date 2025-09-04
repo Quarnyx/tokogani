@@ -74,7 +74,13 @@ function tanggal($tanggal)
                         ?>
                     </tbody>
                 </table>
-
+                <div class="mt-3" style="text-align:end;">
+                    <hr>
+                    <p class="font-weight-bold">Kendal, <?= tanggal(date('Y-m-d')) ?><br></p>
+                    <div class="mt-5">
+                        <p class="font-weight-bold">Abdul Ghani</p>
+                    </div>
+                </div>
 
                 <div class="mt-4 mb-1">
                     <div class="text-end d-print-none">

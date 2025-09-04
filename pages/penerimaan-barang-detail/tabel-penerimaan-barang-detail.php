@@ -23,6 +23,7 @@ session_start();
                 <th>No</th>
                 <th>Kode Barang</th>
                 <th>Nama Barang</th>
+                <th>Harga Beli</th>
                 <th>Jumlah dipesan</th>
                 <th>Satuan</th>
                 <th>Jumlah Diterima</th>
@@ -40,6 +41,7 @@ session_start();
                     <td><?= $no++ ?></td>
                     <td><?= $row['kode_produk'] ?></td>
                     <td><?= $row['nama_produk'] ?></td>
+                    <td><?= number_format($row['harga_beli'], 0, ',', '.') ?></td>
                     <td><?= $row['jumlah'] ?></td>
                     <td><?= $row['satuan'] ?></td>
                     <td><?= $row['jumlah'] ?></td>

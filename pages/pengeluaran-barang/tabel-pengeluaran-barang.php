@@ -7,7 +7,6 @@
             <th>Jumlah</th>
             <th>Satuan</th>
             <th>Tanggal Keluar</th>
-            <th>Keterangan</th>
             <th>PIC</th>
             <th>Aksi</th>
         </tr>
@@ -27,7 +26,6 @@
                 <td><?= $row['jumlah'] ?></td>
                 <td><?= $row['satuan'] ?></td>
                 <td><?= $row['tanggal'] ?></td>
-                <td><?= $row['keterangan'] ?></td>
                 <td><?= $row['nama_pengguna'] ?></td>
                 <td>
                     <div class="d-flex flex-wrap align-items-end gap-1">

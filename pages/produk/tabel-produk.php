@@ -8,7 +8,6 @@
             <th>Harga Beli</th>
             <th>Harga Jual</th>
             <th>Buffer Stock</th>
-            <th>Minimum Stock</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -16,7 +15,7 @@
         <?php
         require_once '../../partials/config.php';
         $no = 1;
-        $sql = "SELECT * FROM produk ORDER BY kode_produk DESC";
+        $sql = "SELECT * FROM produk ORDER BY id_produk DESC";
         $result = $link->query($sql);
         while ($row = $result->fetch_assoc()) {
             ?>
@@ -28,7 +27,6 @@
                 <td>Rp <?= number_format($row['harga_beli'], 0, ',', '.') ?></td>
                 <td>Rp <?= number_format($row['harga_jual'], 0, ',', '.') ?></td>
                 <td><?= $row['buffer_stock'] ?></td>
-                <td><?= $row['minimum_stock'] ?></td>
                 <td>
                     <div class="d-flex flex-wrap align-items-end gap-1">
                         <button id="edit" data-nama="<?= $row['nama_produk'] ?>" data-id="<?= $row['id_produk'] ?>"

@@ -40,20 +40,27 @@ $subTitle = 'Penerimaan Produk';
 
             ?>
             <div class="card-body">
-                <form action="" method="get" class="row g-3">
+                <form action="" method="get" class="row g-3" id="laporanForm">
                     <input type="hidden" name="page" value="laporan-penerimaan-barang">
                     <div class="col-md-6">
                         <label for="validationDefault01" class="form-label">Dari Tanggal</label>
-                        <input type="date" class="form-control" id="validationDefault01" required=""
-                            name="dari_tanggal">
+                        <input type="date" class="form-control" id="validationDefault01" required="" name="dari_tanggal"
+                            value="<?= htmlspecialchars($daritanggal) ?>">
                     </div>
                     <div class="col-md-6">
                         <label for="validationDefault02" class="form-label">Sampai Tanggal</label>
                         <input type="date" class="form-control" id="validationDefault02" required=""
-                            name="sampai_tanggal">
+                            name="sampai_tanggal" value="<?= htmlspecialchars($sampaitanggal) ?>">
                     </div>
+
+                    <!-- validation error message -->
                     <div class="col-12">
-                        <button class="btn btn-primary" type="submit">Pilih</button>
+                        <small id="dateError" class="text-danger" style="display:none;">Dari Tanggal harus lebih kecil
+                            dari Sampai Tanggal.</small>
+                    </div>
+
+                    <div class="col-12">
+                        <button class="btn btn-primary" type="submit" id="pilihBtn">Pilih</button>
                     </div>
                 </form>
             </div> <!-- end card-body -->
@@ -98,6 +105,7 @@ $subTitle = 'Penerimaan Produk';
                             <tr>
                                 <th>No</th>
                                 <th>No Surat Jalan</th>
+                                <th>Kode Produk</th>
                                 <th>Nama Barang</th>
                                 <th>Jumlah</th>
                                 <th>Satuan</th>
@@ -117,6 +125,7 @@ $subTitle = 'Penerimaan Produk';
                                 <tr>
                                     <td><?= $no++ ?></td>
                                     <td><?= $row['no_surat_jalan'] ?></td>
+                                    <td><?= $row['kode_produk'] ?></td>
                                     <td><?= $row['nama_produk'] ?></td>
                                     <td><?= $row['jumlah'] ?></td>
                                     <td><?= $row['satuan'] ?></td>
@@ -130,7 +139,13 @@ $subTitle = 'Penerimaan Produk';
                             ?>
                         </tbody>
                     </table>
-
+                    <div class="mt-3" style="text-align:end;">
+                        <hr>
+                        <p class="font-weight-bold">Kendal, <?= tanggal(date('Y-m-d')) ?><br></p>
+                        <div class="mt-5">
+                            <p class="font-weight-bold">Abdul Ghani</p>
+                        </div>
+                    </div>
 
                     <div class="mt-4 mb-1">
                         <div class="text-end d-print-none">
@@ -149,4 +164,47 @@ $subTitle = 'Penerimaan Produk';
 ?>
 
 <script>
+    (function () {
+        const dariInput = document.getElementById('validationDefault01');
+        const sampaiInput = document.getElementById('validationDefault02');
+        const pilihBtn = document.getElementById('pilihBtn');
+        const dateError = document.getElementById('dateError');
+        const form = document.getElementById('laporanForm');
+
+        function validateDates() {
+            const dari = dariInput.value;
+            const sampai = sampaiInput.value;
+
+            // if either empty, enable button (HTML required will handle submit)
+            if (!dari || !sampai) {
+                dateError.style.display = 'none';
+                pilihBtn.disabled = false;
+                return;
+            }
+
+            // compare as strings in YYYY-MM-DD form works; convert to Date for clarity
+            const dariDate = new Date(dari);
+            const sampaiDate = new Date(sampai);
+
+            if (dariDate >= sampaiDate) {
+                dateError.style.display = 'inline';
+                pilihBtn.disabled = true;
+            } else {
+                dateError.style.display = 'none';
+                pilihBtn.disabled = false;
+            }
+        }
+
+        // validate on load in case values are prefilled
+        window.addEventListener('load', validateDates);
+        dariInput.addEventListener('change', validateDates);
+        sampaiInput.addEventListener('change', validateDates);
+
+        // prevent submit if invalid (extra safety)
+        form.addEventListener('submit', function (e) {
+            if (pilihBtn.disabled) {
+                e.preventDefault();
+            }
+        });
+    })();
 </script>

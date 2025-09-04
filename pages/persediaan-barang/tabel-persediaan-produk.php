@@ -7,7 +7,6 @@
             <th>Satuan</th>
             <th>Stok Tersedia</th>
             <th>Buffer Stock</th>
-            <th>Minimum Stock</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -25,15 +24,11 @@
                 <td><?= $row['nama_produk'] ?></td>
                 <td><?= $row['satuan'] ?></td>
                 <td><?= $row['stok_tersedia'] ?> <br>
-                    <?php if ($row['stok_tersedia'] < $row['minimum_stock']) { ?>
-                        <span class="badge bg-warning">Stok Dibawah Minimum</span>
-                    <?php } ?><br>
                     <?php if ($row['stok_tersedia'] < $row['buffer_stock']) { ?>
                         <span class="badge bg-danger">Stok Dibawah Buffer Stock</span>
                     <?php } ?>
                 </td>
                 <td><?= $row['buffer_stock'] ?></td>
-                <td><?= $row['minimum_stock'] ?></td>
                 <td>
                     <div class="d-flex flex-wrap align-items-end gap-1">
                         <button id="edit" data-nama="<?= $row['nama_produk'] ?>" data-id="<?= $row['id_produk'] ?>"

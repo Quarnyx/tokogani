@@ -6,7 +6,6 @@
             <th>Nama Produk</th>
             <th>Satuan</th>
             <th>Buffer Stock</th>
-            <th>Minimum Stock</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -24,7 +23,6 @@
                 <td><?= $row['nama_produk'] ?></td>
                 <td><?= $row['satuan'] ?></td>
                 <td><?= $row['buffer_stock'] ?></td>
-                <td><?= $row['minimum_stock'] ?></td>
                 <td>
                     <div class="d-flex flex-wrap align-items-end gap-1">
                         <button id="edit" data-nama="<?= $row['nama_produk'] ?>" data-id="<?= $row['id_produk'] ?>"

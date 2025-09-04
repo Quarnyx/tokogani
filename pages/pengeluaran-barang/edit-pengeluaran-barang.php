@@ -49,13 +49,6 @@
                     value="<?= $rowa['tujuan'] ?>">
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <label for="keterangan" class="form-label">Keterangan</label>
-                <textarea class="form-control" name="keterangan" id="keterangan"
-                    placeholder="Keterangan"><?php echo $rowa['keterangan'] ?></textarea>
-            </div>
-        </div>
     </div>
     <button type="submit" class="btn btn-primary mt-3">Simpan</button>
 </form>

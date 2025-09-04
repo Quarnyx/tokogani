@@ -7,21 +7,22 @@ if ($result->num_rows > 0) {
     // Ambil data barang keluar 30 hari terakhir
     $sqla = "SELECT tanggal, SUM(jumlah) as total 
             FROM barang_keluar 
-            WHERE id_produk = $row[id_produk]
+            WHERE id_produk = '$_POST[id]'
             AND tanggal >= CURDATE() - INTERVAL 30 DAY 
             GROUP BY tanggal";
 
     $resulta = mysqli_query($link, $sqla);
 
-    $harian = [];
-    while ($rowa = mysqli_fetch_assoc($resulta)) {
-        $harian[] = $rowa['total'];
+    if (mysqli_num_rows($resulta) > 0) {
+        $harian = [];
+        while ($rowa = mysqli_fetch_assoc($resulta)) {
+            $harian[] = $rowa['total'];
+        }
+
+        $avg_harian = array_sum($harian) / count($harian);
+    } else {
+        $avg_harian = 0;
     }
-
-    if (count($harian) === 0)
-        return 0;
-
-    $avg_harian = array_sum($harian) / count($harian);
 }
 ?>
 <form id="form-edit" enctype="multipart/form-data">

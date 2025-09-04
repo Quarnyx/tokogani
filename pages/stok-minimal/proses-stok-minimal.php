@@ -92,11 +92,9 @@ switch ($_GET['aksi'] ?? '') {
     case 'edit-stok-minimal':
         $id = $_POST['id'];
         $id_supplier = $_POST['id_supplier'];
-        $stok_minimal = $_POST['stok_minimal'];
         $buffer_stock = $_POST['buffer_stock'];
         $sql = "UPDATE produk SET 
-                buffer_stock = '$buffer_stock',
-                minimum_stock = '$stok_minimal'
+                buffer_stock = '$buffer_stock'
                 WHERE id_produk = '$id'";
 
         $result = $link->query($sql);

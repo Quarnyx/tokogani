@@ -9,14 +9,13 @@ if ($result->num_rows > 0) {
 <div class="alert alert-info bg-info-100 text-info-600 border-info-100 px-24 py-11 mb-0 fw-semibold text-lg radius-8 mb-10"
     role="alert">
     <div class="d-flex align-items-center justify-content-between text-lg">
-        Proses Buffer Stock dan Stok Minimal
+        Proses Buffer Stock
         <button class="remove-button text-info-600 text-xxl line-height-1">
             <iconify-icon icon="iconamoon:sign-times-light" class="icon"></iconify-icon>
         </button>
     </div>
     <p class="fw-medium text-info-600 text-sm mt-8">
-        Buffer Stock = (Pengantaran Terlama - Pengantaran Normal) x Rata-rata pengeluaran harian<br>
-        Stok Minimal = Rata-rata pengeluaran harian selama 30 hari × Pengantaran normal
+        Buffer Stock = (Pengantaran Terlama - Pengantaran Normal) x Rata-rata pengeluaran harian
     </p>
 </div>
 <form id="form-edit" enctype="multipart/form-data">
@@ -31,16 +30,19 @@ if ($result->num_rows > 0) {
 
     $result = mysqli_query($link, $sql);
 
-    $harian = [];
-    while ($rowa = mysqli_fetch_assoc($result)) {
-        $harian[] = $rowa['total'];
+    if (mysqli_num_rows($result) > 0) {
+        $harian = [];
+        while ($rowa = mysqli_fetch_assoc($result)) {
+            $harian[] = $rowa['total'];
+        }
+        $max_harian = ceil(max($harian));
+        $avg_harian = ceil(array_sum($harian) / count($harian));
+    } else {
+        $avg_harian = 0;
+        $max_harian = 0;
     }
 
-    if (count($harian) === 0)
-        return 0;
 
-    $max_harian = ceil(max($harian));
-    $avg_harian = ceil(array_sum($harian) / count($harian));
     ?>
     <div class="d-grid gap-3">
         <div class="row">
@@ -110,11 +112,6 @@ if ($result->num_rows > 0) {
                     <input type="text" class="form-control" name="buffer_stock" id="buffer_stock"
                         placeholder="Buffer Stock" readonly>
                 </div>
-                <div class="col-md-6">
-                    <label for="stok_minimal" class="form-label">Stok Minimal</label>
-                    <input type="text" class="form-control" name="stok_minimal" id="stok_minimal"
-                        placeholder="Stok Minimal" readonly>
-                </div>
             </div>
         </div>
         <button type="submit" class="btn btn-primary mt-3">Simpan</button>
@@ -133,9 +130,6 @@ if ($result->num_rows > 0) {
         // hitung buffer stock
         var bufferStock = (pengantaranMaksimal - lamaPengantaran) * avgHarian;
         $('#buffer_stock').val(bufferStock);
-        // hitung stok minimal
-        var stokMinimal = avgHarian * lamaPengantaran;
-        $('#stok_minimal').val(stokMinimal);
     })
     $("#form-edit").submit(function (e) {
         e.preventDefault();

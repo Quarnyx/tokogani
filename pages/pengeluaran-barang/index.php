@@ -29,7 +29,7 @@ $subTitle = 'Pengeluaran Produk';
         loadTable();
         $('#tambah').click(function () {
             $('.modal').modal('show');
-            $('.modal-title').text('Tambah Barang');
+            $('.modal-title').text('Tambah Barang Keluar');
             $('.modal-body').load('pages/pengeluaran-barang/tambah-pengeluaran-barang.php');
         });
     });
