@@ -26,7 +26,7 @@
                                 <td><?= $data['nama_supplier'] ?></td>
                                 <td><?= $data['status'] ?></td>
                                 <td>
-                                    <?php if ($data['status'] != "Diterima") { ?>
+                                    <?php if ($data['status'] != "Diterima" && $data['status'] != "Diterima Sebagian") { ?>
                                         <form action="" method="get" style="display: inline;">
                                             <input type="hidden" name="page" value="penerimaan-barang-detail">
                                             <input type="hidden" name="kodepo" value="<?= $data['no_po'] ?>">

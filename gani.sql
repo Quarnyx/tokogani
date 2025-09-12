@@ -11,7 +11,7 @@
  Target Server Version : 80030 (8.0.30)
  File Encoding         : 65001
 
- Date: 06/09/2025 05:33:15
+ Date: 12/09/2025 10:29:37
 */
 
 SET NAMES utf8mb4;
@@ -89,11 +89,15 @@ CREATE TABLE `barang_masuk`  (
   CONSTRAINT `barang_masuk_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `barang_masuk_ibfk_3` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `barang_masuk_ibfk_4` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 51 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of barang_masuk
 -- ----------------------------
+INSERT INTO `barang_masuk` VALUES (47, '2025-09-12', 32, 1, 'AA-236', 2, '2025-09-12 10:24:16', 1, 'PO-003');
+INSERT INTO `barang_masuk` VALUES (48, '2025-09-12', 28, 50, 'AA-235', 2, '2025-09-12 10:28:15', 1, 'PO-001');
+INSERT INTO `barang_masuk` VALUES (49, '2025-09-12', 32, 49, 'AA-235', 2, '2025-09-12 10:28:15', 1, 'PO-001');
+INSERT INTO `barang_masuk` VALUES (50, '2025-09-12', 32, 1, 'AA-236', 2, '2025-09-12 10:28:49', 1, 'PO-002');
 
 -- ----------------------------
 -- Table structure for pengguna
@@ -150,11 +154,14 @@ CREATE TABLE `po_detail`  (
   INDEX `id_produk`(`id_produk` ASC) USING BTREE,
   INDEX `id_purchase_order`(`no_po` ASC) USING BTREE,
   CONSTRAINT `po_detail_ibfk_1` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of po_detail
 -- ----------------------------
+INSERT INTO `po_detail` VALUES (15, 'PO-001', 28, 50);
+INSERT INTO `po_detail` VALUES (16, 'PO-001', 32, 50);
+INSERT INTO `po_detail` VALUES (19, 'PO-002', 32, 1);
 
 -- ----------------------------
 -- Table structure for produk
@@ -190,18 +197,21 @@ CREATE TABLE `purchase_order`  (
   `no_po` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `tanggal` date NOT NULL,
   `id_supplier` int NOT NULL,
-  `status` enum('Dipesan','Diterima') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `id_pengguna` int NOT NULL,
+  `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   PRIMARY KEY (`id_purchase_order`) USING BTREE,
   INDEX `id_supplier`(`id_supplier` ASC) USING BTREE,
   INDEX `id_pengguna`(`id_pengguna` ASC) USING BTREE,
   CONSTRAINT `purchase_order_ibfk_2` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `purchase_order_ibfk_3` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of purchase_order
 -- ----------------------------
+INSERT INTO `purchase_order` VALUES (8, 'PO-001', '2025-09-12', 2, 'Diterima Sebagian', 1, NULL);
+INSERT INTO `purchase_order` VALUES (11, 'PO-002', '2025-09-12', 2, 'Diterima', 1, 'Backorder dari PO-001 - sisa qty');
 
 -- ----------------------------
 -- Table structure for supplier
@@ -257,7 +267,7 @@ CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_permintaan_barang` AS 
 -- View structure for v_purchase_order
 -- ----------------------------
 DROP VIEW IF EXISTS `v_purchase_order`;
-CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_purchase_order` AS select `purchase_order`.`id_purchase_order` AS `id_purchase_order`,`purchase_order`.`no_po` AS `no_po`,`purchase_order`.`tanggal` AS `tanggal`,`purchase_order`.`id_supplier` AS `id_supplier`,`purchase_order`.`status` AS `status`,`purchase_order`.`id_pengguna` AS `id_pengguna`,`supplier`.`nama_supplier` AS `nama_supplier`,`pengguna`.`nama_pengguna` AS `nama_pengguna` from ((`purchase_order` join `supplier` on((`purchase_order`.`id_supplier` = `supplier`.`id_supplier`))) join `pengguna` on((`purchase_order`.`id_pengguna` = `pengguna`.`id_pengguna`)));
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_purchase_order` AS select `purchase_order`.`id_purchase_order` AS `id_purchase_order`,`purchase_order`.`no_po` AS `no_po`,`purchase_order`.`tanggal` AS `tanggal`,`purchase_order`.`id_supplier` AS `id_supplier`,`purchase_order`.`status` AS `status`,`purchase_order`.`id_pengguna` AS `id_pengguna`,`supplier`.`nama_supplier` AS `nama_supplier`,`pengguna`.`nama_pengguna` AS `nama_pengguna`,`purchase_order`.`keterangan` AS `keterangan` from ((`purchase_order` join `supplier` on((`purchase_order`.`id_supplier` = `supplier`.`id_supplier`))) join `pengguna` on((`purchase_order`.`id_pengguna` = `pengguna`.`id_pengguna`)));
 
 -- ----------------------------
 -- View structure for v_stok

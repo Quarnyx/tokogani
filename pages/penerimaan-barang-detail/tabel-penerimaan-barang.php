@@ -5,8 +5,10 @@ $resultpo = $link->query($sqlpo);
 $rowpo = $resultpo->fetch_assoc();
 session_start();
 ?>
-<form action="pages/penerimaan-barang-detail/proses-penerimaan-barang.php" method="post" enctype="multipart/form-data">
+<form id="penerimaan-form" action="pages/penerimaan-barang-detail/proses-penerimaan-barang.php" method="post"
+    enctype="multipart/form-data">
     <input type="hidden" name="id_pengguna" value="<?= $_SESSION['id_pengguna'] ?>">
+    <input type="hidden" name="create_backorder" id="create_backorder" value="0">
     <div class="row">
         <p>Kode PO : <b><?= $rowpo['no_po'] ?></b></p>
         <input name="no_po" type="hidden" value="<?= $rowpo['no_po'] ?>">
@@ -15,6 +17,7 @@ session_start();
         <p>Tanggal Pesan : <b><?= $rowpo['tanggal'] ?></b></p>
         <p>Tanggal Penerimaan : <input class="" type="date" name="tanggal_penerimaan" required></p>
         <p>No Surat Jalan : <input type="text" name="no_surat_jalan" required></p>
+        <p>Keterangan : <input class="" type="text" name="keterangan" value="<?= $rowpo['keterangan'] ?>"></p>
     </div>
 
     <table id="table-data" class="table table-bordered table-striped">
@@ -77,15 +80,8 @@ session_start();
                 }
             }
             if (invalid) {
-                $('#btn-simpan').prop('disabled', true);
-                if (!hasInvalid) {
-                    if (window.alertify && typeof alertify.error === 'function') {
-                        alertify.error('Jumlah diterima tidak boleh kurang dari jumlah dipesan');
-                    } else {
-                        alert('Jumlah diterima tidak boleh kurang dari jumlah dipesan');
-                    }
-                    hasInvalid = true;
-                }
+                $('#btn-simpan').prop('disabled', false); // allow submit, but will confirm on submit
+                hasInvalid = true;
             } else {
                 $('#btn-simpan').prop('disabled', false);
                 hasInvalid = false;
@@ -96,6 +92,49 @@ session_start();
 
         $(document).on('keyup change', '.jumlah_diterima', function () {
             validateRows();
+        });
+
+        // Intercept form submit to handle partial receipts
+        $('#penerimaan-form').on('submit', function (e) {
+            // check if any received < ordered
+            const jumlahEls = $('.jumlah');
+            const diterimaEls = $('.jumlah_diterima');
+            let hasShortfall = false;
+            for (let i = 0; i < jumlahEls.length; i++) {
+                const jumlah = parseFloat($(jumlahEls[i]).val()) || 0;
+                const diterima = parseFloat($(diterimaEls[i]).val());
+                if (isNaN(diterima)) {
+                    alert('Jumlah diterima harus diisi dengan angka');
+                    e.preventDefault();
+                    return false;
+                }
+                if (diterima < jumlah) {
+                    hasShortfall = true;
+                    break;
+                }
+            }
+
+            if (hasShortfall) {
+                e.preventDefault();
+                const confirmFn = function () {
+                    // set hidden flag and submit
+                    $('#create_backorder').val('1');
+                    $('#penerimaan-form')[0].submit();
+                };
+
+                if (window.alertify && typeof alertify.confirm === 'function') {
+                    alertify.confirm('Konfirmasi', 'Beberapa jumlah diterima kurang dari jumlah dipesan. Buat PO baru untuk kekurangan?', function () {
+                        confirmFn();
+                    }, function () {
+                        // canceled
+                    });
+                } else {
+                    if (confirm('Beberapa jumlah diterima kurang dari jumlah dipesan. Buat PO baru untuk kekurangan?')) {
+                        confirmFn();
+                    }
+                }
+            }
+            // otherwise allow normal submit
         });
 
     });
