@@ -3,6 +3,9 @@ require_once '../../partials/config.php';
 $sqlpo = "SELECT * FROM v_penerimaan_barang WHERE no_po = '" . $_GET['kodepo'] . "'";
 $resultpo = $link->query($sqlpo);
 $rowpo = $resultpo->fetch_assoc();
+$sqlpodetail = "SELECT * FROM v_purchase_order WHERE no_po = '" . $_GET['kodepo'] . "'";
+$resultpodetail = $link->query($sqlpodetail);
+$rowpodetail = $resultpodetail->fetch_assoc();
 session_start();
 ?>
 <form action="pages/penerimaan-barang-detail/proses-penerimaan-barang.php" method="post" enctype="multipart/form-data">
@@ -15,6 +18,7 @@ session_start();
         <p>Tanggal Pesan : <b><?= $rowpo['tanggal'] ?></b></p>
         <p>Tanggal Penerimaan : <?= $rowpo['tanggal'] ?></p>
         <p>No Surat Jalan : <?= $rowpo['no_surat_jalan'] ?></p>
+        <p>Keterangan : <?= $rowpodetail['keterangan'] ?></p>
     </div>
 
     <table id="table-data" class="table table-bordered table-striped">
@@ -42,7 +46,15 @@ session_start();
                     <td><?= $row['kode_produk'] ?></td>
                     <td><?= $row['nama_produk'] ?></td>
                     <td><?= number_format($row['harga_beli'], 0, ',', '.') ?></td>
-                    <td><?= $row['jumlah'] ?></td>
+                    <td>
+                        <?php
+                        // take jumlah from purchase order detail
+                        $sqlDetail = "SELECT jumlah FROM po_detail WHERE no_po = '" . $_GET['kodepo'] . "' AND id_produk = " . $row['id_produk'];
+                        $resultDetail = $link->query($sqlDetail);
+                        $rowDetail = $resultDetail->fetch_assoc();
+                        echo $rowDetail['jumlah'];
+                        ?>
+                    </td>
                     <td><?= $row['satuan'] ?></td>
                     <td><?= $row['jumlah'] ?></td>
                 </tr>
