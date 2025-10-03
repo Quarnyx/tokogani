@@ -3,6 +3,7 @@
         <thead>
             <tr>
                 <th>No</th>
+                <th>Kode Supplier</th>
                 <th>Nama Supplier</th>
                 <th>Alamat</th>
                 <th>Kontak</th>
@@ -21,6 +22,7 @@
                 ?>
                 <tr>
                     <td><?= $no++ ?></td>
+                    <td><?= $row['kode_supplier'] ?></td>
                     <td><?= $row['nama_supplier'] ?></td>
                     <td class="text-wrap"><?= $row['alamat'] ?></td>
                     <td><?= $row['kontak'] ?></td>

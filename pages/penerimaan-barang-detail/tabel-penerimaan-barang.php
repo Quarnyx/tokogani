@@ -16,7 +16,21 @@ session_start();
         <input type="hidden" name="id_supplier" value="<?= $rowpo['id_supplier'] ?>">
         <p>Tanggal Pesan : <b><?= $rowpo['tanggal'] ?></b></p>
         <p>Tanggal Penerimaan : <input class="" type="date" name="tanggal_penerimaan" required></p>
-        <p>No Surat Jalan : <input type="text" name="no_surat_jalan" required></p>
+        <!-- generate kode surat jalan dari database -->
+        <?php
+        $prefix = "SJ";
+        $sql = "SELECT MAX(no_surat_jalan) AS max_kode FROM barang_masuk";
+        $result = $link->query($sql);
+        $row = $result->fetch_assoc();
+        $maxKode = $row['max_kode'];
+        $noUrut = "SELECT count(*) as count FROM barang_masuk";
+        $resultCount = $link->query($noUrut);
+        $rowCount = $resultCount->fetch_assoc();
+        $count = $rowCount['count'];
+        $noUrut = $count + 1;
+        $kodeSuratJalan = $prefix . "-" . sprintf("%04s", $noUrut);
+        ?>
+        <p>No Surat Jalan : <input type="text" name="no_surat_jalan" value="<?= $kodeSuratJalan ?>" required></p>
         <p>Keterangan : <input class="" type="text" name="keterangan" value="<?= $rowpo['keterangan'] ?>"></p>
     </div>
 

@@ -72,15 +72,25 @@ $subTitle = 'Pengembalian Produk';
     <div class="row mt-3">
         <div class="col-12">
             <div class="card shadow-none">
-                <h5 class="text-center mt-3 "><b>TOKO CAT GANI</b><br><b>Laporan Pengembalian Barang</b></h5>
-                <h6 class="text-center mb-3"><br>Periode <?php
-                if (!empty($_GET["dari_tanggal"]) && !empty($_GET["sampai_tanggal"])) {
-                    echo tanggal($_GET['dari_tanggal']) . " s.d " . tanggal($_GET['sampai_tanggal']);
-                } else {
-                    echo "Semua";
-                }
-                ?>
-                </h6>
+                <div class="row">
+                    <div class="col-4" style="align-content: center;">
+
+                        <img src="assets/images/logo.png" alt="site logo"
+                            style="width: 200%; height: auto; vertical-align: middle;">
+
+                    </div>
+                    <div class="col-8">
+                        <h5 class="text-center mt-3 "><b>TOKO CAT GANI</b><br><b>Laporan Penerimaan Barang</b></h5>
+                        <h6 class="text-center mb-3"><br>Periode <?php
+                        if (!empty($_GET["dari_tanggal"]) && !empty($_GET["sampai_tanggal"])) {
+                            echo tanggal($_GET['dari_tanggal']) . " s.d " . tanggal($_GET['sampai_tanggal']);
+                        } else {
+                            echo "Semua";
+                        }
+                        ?>
+                        </h6>
+                    </div>
+                </div>
                 <hr>
                 <div class="mt-5 p-10">
                     <table class="table table-borderless">

@@ -1,7 +1,23 @@
 <form id="tambah-supplier" enctype="multipart/form-data">
     <div class="d-grid gap-3">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
+                <?php
+                require_once '../../partials/config.php';
+
+                $takeKode = "SELECT count(*) as count FROM supplier";
+                $resultKode = $link->query($takeKode);
+                $rowKode = $resultKode->fetch_assoc();
+                $count = $rowKode['count'];
+                $noUrut = $count + 1;
+                $prefix = "SP";
+                $kodeSupplier = $prefix . "-" . sprintf("%04s", $noUrut);
+                ?>
+                <label for="kode_supplier" class="form-label">Kode Supplier</label>
+                <input type="text" class="form-control" name="kode_supplier" id="kode_supplier"
+                    placeholder="Kode Supplier" value="<?= $kodeSupplier ?>" readonly>
+            </div>
+            <div class="col-md-6">
                 <label for="nama_supplier" class="form-label">Nama Supplier</label>
                 <input type="text" class="form-control" name="nama_supplier" id="nama_supplier"
                     placeholder="Nama Supplier" required>

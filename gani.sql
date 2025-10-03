@@ -11,7 +11,7 @@
  Target Server Version : 80030 (8.0.30)
  File Encoding         : 65001
 
- Date: 12/09/2025 10:29:37
+ Date: 04/10/2025 00:27:51
 */
 
 SET NAMES utf8mb4;
@@ -89,7 +89,7 @@ CREATE TABLE `barang_masuk`  (
   CONSTRAINT `barang_masuk_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `barang_masuk_ibfk_3` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `barang_masuk_ibfk_4` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 51 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 52 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of barang_masuk
@@ -97,7 +97,7 @@ CREATE TABLE `barang_masuk`  (
 INSERT INTO `barang_masuk` VALUES (47, '2025-09-12', 32, 1, 'AA-236', 2, '2025-09-12 10:24:16', 1, 'PO-003');
 INSERT INTO `barang_masuk` VALUES (48, '2025-09-12', 28, 50, 'AA-235', 2, '2025-09-12 10:28:15', 1, 'PO-001');
 INSERT INTO `barang_masuk` VALUES (49, '2025-09-12', 32, 49, 'AA-235', 2, '2025-09-12 10:28:15', 1, 'PO-001');
-INSERT INTO `barang_masuk` VALUES (50, '2025-09-12', 32, 1, 'AA-236', 2, '2025-09-12 10:28:49', 1, 'PO-002');
+INSERT INTO `barang_masuk` VALUES (51, '2025-10-08', 32, 1, 'SJ-0004', 2, '2025-10-03 23:58:07', 1, 'PO-002');
 
 -- ----------------------------
 -- Table structure for pengguna
@@ -154,7 +154,7 @@ CREATE TABLE `po_detail`  (
   INDEX `id_produk`(`id_produk` ASC) USING BTREE,
   INDEX `id_purchase_order`(`no_po` ASC) USING BTREE,
   CONSTRAINT `po_detail_ibfk_1` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of po_detail
@@ -162,6 +162,7 @@ CREATE TABLE `po_detail`  (
 INSERT INTO `po_detail` VALUES (15, 'PO-001', 28, 50);
 INSERT INTO `po_detail` VALUES (16, 'PO-001', 32, 50);
 INSERT INTO `po_detail` VALUES (19, 'PO-002', 32, 1);
+INSERT INTO `po_detail` VALUES (20, 'PO-003', 29, 10);
 
 -- ----------------------------
 -- Table structure for produk
@@ -205,13 +206,14 @@ CREATE TABLE `purchase_order`  (
   INDEX `id_pengguna`(`id_pengguna` ASC) USING BTREE,
   CONSTRAINT `purchase_order_ibfk_2` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `purchase_order_ibfk_3` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of purchase_order
 -- ----------------------------
 INSERT INTO `purchase_order` VALUES (8, 'PO-001', '2025-09-12', 2, 'Diterima Sebagian', 1, NULL);
 INSERT INTO `purchase_order` VALUES (11, 'PO-002', '2025-09-12', 2, 'Diterima', 1, 'Backorder dari PO-001 - sisa qty');
+INSERT INTO `purchase_order` VALUES (12, 'PO-003', '2025-10-03', 2, 'Dipesan', 1, NULL);
 
 -- ----------------------------
 -- Table structure for supplier
@@ -224,14 +226,16 @@ CREATE TABLE `supplier`  (
   `kontak` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `lama_pengantaran_maksimal` int NULL DEFAULT NULL,
   `avg_lama_pengantaran` int NULL DEFAULT NULL,
+  `kode_supplier` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_supplier`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of supplier
 -- ----------------------------
-INSERT INTO `supplier` VALUES (2, 'PT. Maju Jaya', 'Tangerang', '085682224', 10, 7);
-INSERT INTO `supplier` VALUES (3, 'PT Roda Maju', 'Tangerang', '082525525252', 12, 7);
+INSERT INTO `supplier` VALUES (2, 'PT. Maju Jaya', 'Tangerang', '085682224', 10, 7, 'SP-0001');
+INSERT INTO `supplier` VALUES (3, 'PT Roda Maju', 'Tangerang', '082525525252', 12, 7, 'SP-0002');
+INSERT INTO `supplier` VALUES (5, 'PT. Siba Surya', 'Semarang', '99299292', 7, 4, 'SP-0003');
 
 -- ----------------------------
 -- View structure for v_detail_po

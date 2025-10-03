@@ -10,7 +10,12 @@ if ($result->num_rows > 0) {
     <input type="hidden" name="id" value="<?= $row['id_supplier'] ?>">
     <div class="d-grid gap-3">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
+                <label for="kode_supplier" class="form-label">Kode Supplier</label>
+                <input type="text" class="form-control" name="kode_supplier" id="kode_supplier"
+                    placeholder="Kode Supplier" value="<?= $row['kode_supplier'] ?>" readonly>
+            </div>
+            <div class="col-md-6">
                 <label for="nama_supplier" class="form-label">Nama Supplier</label>
                 <input type="text" class="form-control" name="nama_supplier" id="nama_supplier"
                     placeholder="Nama Supplier" value="<?= $row['nama_supplier'] ?>" required>

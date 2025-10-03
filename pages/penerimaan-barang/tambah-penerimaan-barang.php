@@ -56,7 +56,7 @@
             <div class="col-md-6">
                 <label for="no_surat_jalan" class="form-label">No Surat Jalan</label>
                 <textarea class="form-control" name="no_surat_jalan" id="no_surat_jalan"
-                    placeholder="No Surat Jalan"></textarea>
+                    placeholder="No Surat Jalan"><?= $kodeSuratJalan ?></textarea>
             </div>
         </div>
     </div>

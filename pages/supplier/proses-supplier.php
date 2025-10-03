@@ -10,8 +10,9 @@ switch ($aksi) {
         $kontak = $_POST['kontak'];
         $lama_pengantaran_maksimal = $_POST['lama_pengantaran_maksimal'];
         $avg_lama_pengantaran = $_POST['avg_lama_pengantaran'];
+        $kode_supplier = $_POST['kode_supplier'];
 
-        $sql = "INSERT INTO supplier (nama_supplier, alamat, kontak, lama_pengantaran_maksimal, avg_lama_pengantaran) VALUES ('$nama_supplier', '$alamat', '$kontak', '$lama_pengantaran_maksimal', '$avg_lama_pengantaran')";
+        $sql = "INSERT INTO supplier (nama_supplier, alamat, kontak, lama_pengantaran_maksimal, avg_lama_pengantaran, kode_supplier) VALUES ('$nama_supplier', '$alamat', '$kontak', '$lama_pengantaran_maksimal', '$avg_lama_pengantaran', '$kode_supplier')";
         if ($link->query($sql)) {
             echo "ok";
         } else {

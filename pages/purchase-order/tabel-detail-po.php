@@ -69,7 +69,8 @@
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
                                         ?>
-                                        <option value="<?= $row['id_supplier'] ?>"><?= $row['nama_supplier'] ?></option>
+                                        <option value="<?= $row['id_supplier'] ?>"><?= $row['kode_supplier'] ?> -
+                                            <?= $row['nama_supplier'] ?></option>
 
                                         <?php
                                     }
