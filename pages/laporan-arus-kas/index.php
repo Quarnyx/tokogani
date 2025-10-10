@@ -1,6 +1,6 @@
 <?php
-$title = 'Laporan Penerimaan Produk';
-$subTitle = 'Penerimaan Produk';
+$title = 'Laporan Arus Kas';
+$subTitle = 'Laporan Arus Kas';
 ?>
 <?php include './partials/breadcrumb.php' ?>
 
@@ -41,7 +41,7 @@ $subTitle = 'Penerimaan Produk';
             ?>
             <div class="card-body">
                 <form action="" method="get" class="row g-3" id="laporanForm">
-                    <input type="hidden" name="page" value="laporan-penerimaan-barang">
+                    <input type="hidden" name="page" value="laporan-arus-kas">
                     <div class="col-md-6">
                         <label for="validationDefault01" class="form-label">Dari Tanggal</label>
                         <input type="date" class="form-control" id="validationDefault01" required="" name="dari_tanggal"
@@ -80,7 +80,7 @@ $subTitle = 'Penerimaan Produk';
 
                     </div>
                     <div class="col-8">
-                        <h5 class="text-center mt-3 "><b>TOKO CAT GANI</b><br><b>Laporan Penerimaan Barang</b></h5>
+                        <h5 class="text-center mt-3 "><b>TOKO CAT GANI</b><br><b>Laporan Arus Kas</b></h5>
                         <h6 class="text-center mb-3"><br>Periode <?php
                         if (!empty($_GET["dari_tanggal"]) && !empty($_GET["sampai_tanggal"])) {
                             echo tanggal($_GET['dari_tanggal']) . " s.d " . tanggal($_GET['sampai_tanggal']);
@@ -115,35 +115,38 @@ $subTitle = 'Penerimaan Produk';
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>No Surat Jalan</th>
-                                <th>Kode Produk</th>
-                                <th>Nama Barang</th>
-                                <th>Jumlah</th>
-                                <th>Satuan</th>
-                                <th>Tanggal Masuk</th>
-                                <th>Supplier</th>
-                                <th>PIC</th>
+                                <th>Bulan</th>
+                                <th>Total Kas Masuk</th>
+                                <th>Total Kas Keluar</th>
+                                <th>Arus Kas Bersih</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             require_once '././partials/config.php';
                             $no = 1;
-                            $sql = "SELECT * FROM v_penerimaan_barang WHERE tanggal BETWEEN '$daritanggal' AND '$sampaitanggal' ORDER BY no_surat_jalan ASC";
+                            $sql = "SELECT
+                                        DATE_FORMAT( tanggal_periode, '%M %Y' ) AS bulan,
+                                        FORMAT( kas_masuk, 0, 'id_ID' ) AS kas_masuk,
+                                        FORMAT( kas_keluar, 0, 'id_ID' ) AS kas_keluar,
+                                        FORMAT( arus_kas_bersih, 0, 'id_ID' ) AS arus_kas_bersih 
+                                    FROM
+                                        v_laporan_arus_kas 
+                                    WHERE
+                                        tanggal_periode BETWEEN '$daritanggal' 
+                                        AND '$sampaitanggal' 
+                                    ORDER BY
+                                        tanggal_periode;
+                            ";
                             $result = $link->query($sql);
                             while ($row = $result->fetch_assoc()) {
                                 ?>
                                 <tr>
                                     <td><?= $no++ ?></td>
-                                    <td><?= $row['no_surat_jalan'] ?></td>
-                                    <td><?= $row['kode_produk'] ?></td>
-                                    <td><?= $row['nama_produk'] ?></td>
-                                    <td><?= $row['jumlah'] ?></td>
-                                    <td><?= $row['satuan'] ?></td>
-                                    <td><?= $row['tanggal'] ?></td>
-                                    <td><?= $row['nama_supplier'] ?></td>
-                                    <td><?= $row['nama_pengguna'] ?></td>
-
+                                    <td><?= $row['bulan'] ?></td>
+                                    <td><?= $row['kas_masuk'] ?></td>
+                                    <td><?= $row['kas_keluar'] ?></td>
+                                    <td><?= $row['arus_kas_bersih'] ?></td>
                                 </tr>
                                 <?php
                             }

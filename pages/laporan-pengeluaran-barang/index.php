@@ -188,14 +188,12 @@ $subTitle = 'Pengeluaran Produk';
             const dari = dariInput.value;
             const sampai = sampaiInput.value;
 
-            // if either empty, enable button (HTML required will handle submit)
             if (!dari || !sampai) {
                 dateError.style.display = 'none';
                 pilihBtn.disabled = false;
                 return;
             }
 
-            // compare as strings in YYYY-MM-DD form works; convert to Date for clarity
             const dariDate = new Date(dari);
             const sampaiDate = new Date(sampai);
 
@@ -208,12 +206,10 @@ $subTitle = 'Pengeluaran Produk';
             }
         }
 
-        // validate on load in case values are prefilled
         window.addEventListener('load', validateDates);
         dariInput.addEventListener('change', validateDates);
         sampaiInput.addEventListener('change', validateDates);
 
-        // prevent submit if invalid (extra safety)
         form.addEventListener('submit', function (e) {
             if (pilihBtn.disabled) {
                 e.preventDefault();

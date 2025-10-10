@@ -121,6 +121,12 @@
                         <span>Laporan Pengembalian Barang</span>
                     </a>
                 </li>
+                <li>
+                    <a href="?page=laporan-arus-kas">
+                        <iconify-icon icon="mingcute:chart-horizontal-line" class="menu-icon"></iconify-icon>
+                        <span>Laporan Arus Kas</span>
+                    </a>
+                </li>
                 <?php
             }
             ?>
@@ -209,6 +215,12 @@
                     <a href="?page=laporan-pengembalian-barang">
                         <iconify-icon icon="mingcute:chart-horizontal-line" class="menu-icon"></iconify-icon>
                         <span>Return Barang</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="?page=laporan-arus-kas">
+                        <iconify-icon icon="mingcute:chart-horizontal-line" class="menu-icon"></iconify-icon>
+                        <span>Laporan Arus Kas</span>
                     </a>
                 </li>
                 <?php
