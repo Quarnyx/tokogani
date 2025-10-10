@@ -11,7 +11,7 @@
  Target Server Version : 80030 (8.0.30)
  File Encoding         : 65001
 
- Date: 04/10/2025 00:27:51
+ Date: 10/10/2025 17:50:53
 */
 
 SET NAMES utf8mb4;
@@ -35,11 +35,12 @@ CREATE TABLE `barang_keluar`  (
   INDEX `id_pengguna`(`id_pengguna` ASC) USING BTREE,
   CONSTRAINT `barang_keluar_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `barang_keluar_ibfk_3` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 460 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 461 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of barang_keluar
 -- ----------------------------
+INSERT INTO `barang_keluar` VALUES (460, '2025-10-10', 28, 30, '2025-10-10 14:57:09', 1, 'as', 6000.00);
 
 -- ----------------------------
 -- Table structure for barang_kembali
@@ -238,10 +239,22 @@ INSERT INTO `supplier` VALUES (3, 'PT Roda Maju', 'Tangerang', '082525525252', 1
 INSERT INTO `supplier` VALUES (5, 'PT. Siba Surya', 'Semarang', '99299292', 7, 4, 'SP-0003');
 
 -- ----------------------------
+-- View structure for v_arus_kas_summary
+-- ----------------------------
+DROP VIEW IF EXISTS `v_arus_kas_summary`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_arus_kas_summary` AS select `v_laporan_arus_kas`.`aktivitas` AS `aktivitas`,`v_laporan_arus_kas`.`bulan` AS `bulan`,`v_laporan_arus_kas`.`kas_masuk` AS `kas_masuk`,`v_laporan_arus_kas`.`kas_keluar` AS `kas_keluar`,`v_laporan_arus_kas`.`arus_kas_bersih` AS `arus_kas_bersih` from `v_laporan_arus_kas` union all select 'TOTAL' AS `aktivitas`,'KESELURUHAN' AS `bulan`,sum(`v_laporan_arus_kas`.`kas_masuk`) AS `kas_masuk`,sum(`v_laporan_arus_kas`.`kas_keluar`) AS `kas_keluar`,sum(`v_laporan_arus_kas`.`arus_kas_bersih`) AS `arus_kas_bersih` from `v_laporan_arus_kas`;
+
+-- ----------------------------
 -- View structure for v_detail_po
 -- ----------------------------
 DROP VIEW IF EXISTS `v_detail_po`;
 CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_detail_po` AS select `po_detail`.`id_po_detail` AS `id_po_detail`,`po_detail`.`id_produk` AS `id_produk`,`po_detail`.`jumlah` AS `jumlah`,`produk`.`nama_produk` AS `nama_produk`,`po_detail`.`no_po` AS `no_po`,`produk`.`harga_beli` AS `harga_beli`,`produk`.`kode_produk` AS `kode_produk`,`produk`.`satuan` AS `satuan` from (`po_detail` join `produk` on((`po_detail`.`id_produk` = `produk`.`id_produk`)));
+
+-- ----------------------------
+-- View structure for v_laporan_arus_kas
+-- ----------------------------
+DROP VIEW IF EXISTS `v_laporan_arus_kas`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_laporan_arus_kas` AS select 'Operasional' AS `aktivitas`,date_format(`summary_bulanan`.`periode`,'%Y-%m') AS `bulan`,coalesce(`summary_bulanan`.`kas_masuk`,0) AS `kas_masuk`,coalesce(`summary_bulanan`.`kas_keluar`,0) AS `kas_keluar`,(coalesce(`summary_bulanan`.`kas_masuk`,0) - coalesce(`summary_bulanan`.`kas_keluar`,0)) AS `arus_kas_bersih`,`summary_bulanan`.`periode` AS `tanggal_periode` from (select date_format(`transaksi_kas`.`tanggal`,'%Y-%m-01') AS `periode`,sum((case when (`transaksi_kas`.`jenis` = 'masuk') then `transaksi_kas`.`jumlah` else 0 end)) AS `kas_masuk`,sum((case when (`transaksi_kas`.`jenis` = 'keluar') then `transaksi_kas`.`jumlah` else 0 end)) AS `kas_keluar` from (select `bk`.`tanggal` AS `tanggal`,'masuk' AS `jenis`,sum((`bk`.`jumlah` * coalesce(`bk`.`harga_jual`,`p`.`harga_jual`))) AS `jumlah` from (`barang_keluar` `bk` join `produk` `p` on((`bk`.`id_produk` = `p`.`id_produk`))) group by `bk`.`tanggal` union all select `bm`.`tanggal` AS `tanggal`,'keluar' AS `jenis`,sum((`bm`.`jumlah` * `p`.`harga_beli`)) AS `jumlah` from (`barang_masuk` `bm` join `produk` `p` on((`bm`.`id_produk` = `p`.`id_produk`))) group by `bm`.`tanggal` union all select `bkb`.`tanggal` AS `tanggal`,'masuk' AS `jenis`,sum((`bkb`.`jumlah` * `p`.`harga_beli`)) AS `jumlah` from (`barang_kembali` `bkb` join `produk` `p` on((`bkb`.`id_produk` = `p`.`id_produk`))) group by `bkb`.`tanggal`) `transaksi_kas` group by date_format(`transaksi_kas`.`tanggal`,'%Y-%m-01')) `summary_bulanan` order by `summary_bulanan`.`periode`;
 
 -- ----------------------------
 -- View structure for v_penerimaan_barang
@@ -278,5 +291,66 @@ CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_purchase_order` AS sel
 -- ----------------------------
 DROP VIEW IF EXISTS `v_stok`;
 CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_stok` AS select `p`.`id_produk` AS `id_produk`,`p`.`kode_produk` AS `kode_produk`,`p`.`nama_produk` AS `nama_produk`,`p`.`satuan` AS `satuan`,ifnull(`m`.`total_masuk`,0) AS `total_masuk`,ifnull(`k`.`total_keluar`,0) AS `total_keluar`,ifnull(`bk`.`total_kembali`,0) AS `total_kembali`,((ifnull(`m`.`total_masuk`,0) - ifnull(`k`.`total_keluar`,0)) - ifnull(`bk`.`total_kembali`,0)) AS `stok_tersedia`,`p`.`buffer_stock` AS `buffer_stock`,`p`.`harga_beli` AS `harga_beli`,`p`.`harga_jual` AS `harga_jual` from (((`produk` `p` left join (select `barang_masuk`.`id_produk` AS `id_produk`,sum(`barang_masuk`.`jumlah`) AS `total_masuk` from `barang_masuk` group by `barang_masuk`.`id_produk`) `m` on((`p`.`id_produk` = `m`.`id_produk`))) left join (select `barang_keluar`.`id_produk` AS `id_produk`,sum(`barang_keluar`.`jumlah`) AS `total_keluar` from `barang_keluar` group by `barang_keluar`.`id_produk`) `k` on((`p`.`id_produk` = `k`.`id_produk`))) left join (select `barang_kembali`.`id_produk` AS `id_produk`,sum(`barang_kembali`.`jumlah`) AS `total_kembali` from `barang_kembali` group by `barang_kembali`.`id_produk`) `bk` on((`p`.`id_produk` = `bk`.`id_produk`)));
+
+-- ----------------------------
+-- Procedure structure for sp_laporan_arus_kas
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `sp_laporan_arus_kas`;
+delimiter ;;
+CREATE PROCEDURE `sp_laporan_arus_kas`(IN p_tanggal_awal DATE,
+    IN p_tanggal_akhir DATE)
+BEGIN
+    SELECT 
+        'Operasional' as aktivitas,
+        DATE_FORMAT(periode, '%M %Y') as bulan,
+        FORMAT(COALESCE(kas_masuk, 0), 0, 'id_ID') as kas_masuk,
+        FORMAT(COALESCE(kas_keluar, 0), 0, 'id_ID') as kas_keluar,
+        FORMAT((COALESCE(kas_masuk, 0) - COALESCE(kas_keluar, 0)), 0, 'id_ID') as arus_kas_bersih
+    FROM (
+        SELECT 
+            DATE_FORMAT(tanggal, '%Y-%m-01') as periode,
+            SUM(CASE WHEN jenis = 'masuk' THEN jumlah ELSE 0 END) as kas_masuk,
+            SUM(CASE WHEN jenis = 'keluar' THEN jumlah ELSE 0 END) as kas_keluar
+        FROM (
+            -- Penjualan Barang (Kas Masuk)
+            SELECT 
+                bk.tanggal,
+                'masuk' as jenis,
+                SUM(bk.jumlah * COALESCE(bk.harga_jual, p.harga_jual)) as jumlah
+            FROM barang_keluar bk
+            JOIN produk p ON bk.id_produk = p.id_produk
+            WHERE bk.tanggal BETWEEN p_tanggal_awal AND p_tanggal_akhir
+            GROUP BY bk.tanggal
+            
+            UNION ALL
+            
+            -- Pembelian Barang (Kas Keluar)
+            SELECT 
+                bm.tanggal,
+                'keluar' as jenis,
+                SUM(bm.jumlah * p.harga_beli) as jumlah
+            FROM barang_masuk bm
+            JOIN produk p ON bm.id_produk = p.id_produk
+            WHERE bm.tanggal BETWEEN p_tanggal_awal AND p_tanggal_akhir
+            GROUP BY bm.tanggal
+            
+            UNION ALL
+            
+            -- Retur Barang ke Supplier (Kas Masuk)
+            SELECT 
+                bkb.tanggal,
+                'masuk' as jenis,
+                SUM(bkb.jumlah * p.harga_beli) as jumlah
+            FROM barang_kembali bkb
+            JOIN produk p ON bkb.id_produk = p.id_produk
+            WHERE bkb.tanggal BETWEEN p_tanggal_awal AND p_tanggal_akhir
+            GROUP BY bkb.tanggal
+        ) transaksi_kas
+        GROUP BY DATE_FORMAT(tanggal, '%Y-%m-01')
+    ) summary_bulanan
+    ORDER BY periode;
+END
+;;
+delimiter ;
 
 SET FOREIGN_KEY_CHECKS = 1;
